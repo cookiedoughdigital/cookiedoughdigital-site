@@ -48,7 +48,8 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
 } else {
   // Play once and stop on the settled grid (hold is 5.0-6.3s; 6.3-7.0s unwinds back into the tornado)
   document.querySelectorAll<HTMLVideoElement>('.hero-video').forEach((v) => {
-    const stop = () => { v.pause(); v.currentTime = 5.8; };
+    let done = false;
+    const stop = () => { if (done) return; done = true; v.pause(); v.currentTime = 5.8; };
     v.addEventListener('timeupdate', () => { if (v.currentTime >= 5.8) stop(); });
     v.addEventListener('ended', stop);
   });
