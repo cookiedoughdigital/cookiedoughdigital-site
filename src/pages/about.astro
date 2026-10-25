@@ -43,6 +43,24 @@ const certs = [
   ['coursiv-canva-ai','Coursiv Master of Canva AI certificate, Gary Graham'],
   ['coursiv-lovable','Coursiv Master of Lovable certificate, Gary Graham'],
 ];
+const food = [
+  ['clams-pot','Clams in tomato broth with herbs in a white braiser on a stovetop'],
+  ['grilled-corn','Ears of corn charring on a grill over hot coals'],
+  ['margherita','Margherita flatbread with tomato, mozzarella and basil, cut into quarters'],
+  ['scallop-skewers','Grilled scallop skewers on a wooden board with lemon and a glass of white wine'],
+  ['grilling-steaks','Steaks and asparagus on a smoking charcoal grill, turned with tongs'],
+  ['salmon-burger','Salmon sandwich on dark bread with arugula and crispy onions, sweet potato fries and a mini bottle of Sauvignon Blanc'],
+  ['pulled-pork-slider','Pulled pork sandwich topped with mango salsa beside a mini bottle of sweet red wine'],
+  ['curly-fries-burger','Burger with melted cheese and a pepperoncini, curly fries and a mini bottle of Pinot Noir'],
+  ['chicken-waffles','Fried chicken and waffles with syrup and scallions beside a mini bottle of Cabernet Sauvignon'],
+  ['charcuterie','Large grazing board of cheeses, salami, melon, berries and broccoli with dips'],
+  ['chocolate-fountain','Chocolate fountain dessert table with strawberries, cut fruit and marshmallows'],
+  ['ribeye-board','Sliced ribeye on a wooden board with sides and sauces in small copper pans'],
+  ['wine-glasses-bar','Rows of wine glasses set up on a restaurant bar before service'],
+  ['plated-fish','White fish in broth with greens and nasturtium flowers in a white bowl'],
+  ['watermelon-salad','Watermelon salad with little gem lettuce, watermelon radish, jalapeño and peanuts'],
+  ['roasted-chicken','Roasted chicken pieces over vegetables with green herb sauce on a white plate'],
+];
 ---
 <Layout title="About · Cookie Dough Digital">
 <section class="head on-marsh"><div class="container">
@@ -53,11 +71,6 @@ const certs = [
   <img class="portrait" src={`${b}/media/gary-headshot.jpg`} width="1024" height="912" alt="Gary Graham, founder of Cookie Dough Digital" />
   <div class="copy">{story.map((p) => <p>{p}</p>)}</div>
 </div></section>
-<section class="section cta-sec"><div class="container"><div class="band">
-  <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a free consultation →</a>
-  <p class="contact"><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a> · <a href="tel:4046604023">404-660-4023</a></p>
-  <p class="contact">Monday–Saturday 9AM–6PM · Closed Sundays · Bluffton, South Carolina</p>
-</div></div></section>
 <div class="container galleries">
 <section class="section certs" aria-labelledby="certs-h"><div>
   <h2 id="certs-h">Credentials that keep the kitchen honest</h2>
@@ -77,6 +90,13 @@ const certs = [
     </div>
   </div>
 </div></section>
+<section class="section consult" aria-label="Book a free consultation">
+<div class="band">
+  <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a free consultation →</a>
+  <p class="contact"><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a> · <a href="tel:4046604023">404-660-4023</a></p>
+  <p class="contact">Monday–Saturday 9AM–6PM · Closed Sundays · Bluffton, South Carolina</p>
+</div>
+</section>
 <section class="section certs kitchen" aria-labelledby="kitchen-h"><div>
   <h2 id="kitchen-h">A few more plates from the kitchen</h2>
   <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands: sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
@@ -91,6 +111,23 @@ const certs = [
       <button type="button" class="nav prev" aria-label="Previous artwork">‹</button>
       <div class="dots">{art.map((_,i) => <button type="button" class="dot" aria-label={`Show artwork ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
       <button type="button" class="nav next" aria-label="Next artwork">›</button>
+    </div>
+  </div>
+</div></section>
+<section class="section certs kitchen food" aria-labelledby="food-h"><div>
+  <h2 id="food-h">Don't get it twisted... I still know my way around a plate</h2>
+  <p class="intro">Food styling and photography for brands that want the dish to look as good as it tastes. And if you need me in the kitchen for real? Say the word... I’ll cook for real. #IronChef</p>
+  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Food gallery" tabindex="0">
+    <div class="track" aria-live="polite">{food.map(([f,alt],i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${food.length}`} hidden={i!==0}>
+        <img class="cert food-img" src={`${b}/media/food/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
+      </div>))}
+    </div>
+    <p class="count" aria-hidden="true"><span class="cur">1</span> / {food.length}</p>
+    <div class="controls">
+      <button type="button" class="nav prev" aria-label="Previous food photo">‹</button>
+      <div class="dots">{food.map((_,i) => <button type="button" class="dot" aria-label={`Show food photo ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
+      <button type="button" class="nav next" aria-label="Next food photo">›</button>
     </div>
   </div>
 </div></section>
@@ -130,7 +167,6 @@ h1{font-size:76px}
 .story{display:flow-root}
 .copy p{font-size:18px;line-height:1.6;margin:0 0 20px}
 .copy p:last-child{margin-bottom:0}
-.cta-sec{padding-top:48px}
 .portrait{aspect-ratio:3/4;width:340px;height:auto;max-width:40%;float:right;margin:6px 0 16px 48px;object-fit:cover;object-position:35% 20%;border-radius:var(--r);display:block}
 
 .band{background:var(--copper);border-radius:var(--r);padding:48px 40px}
@@ -144,6 +180,9 @@ h1{font-size:76px}
 .intro{font-size:18px;line-height:1.6;max-width:720px;margin:0 0 24px;color:var(--sage)}
 .galleries{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 .galleries .kitchen{padding-top:var(--gap)}
+.consult{padding-top:var(--gap);padding-bottom:var(--gap)}
+.consult .band{max-width:480px;margin:0 auto;text-align:left;display:flex;flex-direction:column;align-items:flex-start}
+.food-img{background:var(--oyster)}
 .galleries .certs h2{font-size:32px}
 .galleries .intro{font-size:16px}
 .galleries .certs h2{margin-top:0;margin-bottom:12px}
@@ -162,6 +201,7 @@ h1{font-size:76px}
   .band{padding:32px 20px}
   .galleries{grid-template-columns:1fr;gap:0}
   .galleries .kitchen{padding-top:0}
+  .consult{padding-top:0}
   .galleries .certs h2{font-size:30px}
   .dots{display:none}
     .intro{font-size:16px}
