@@ -9,7 +9,24 @@ const story = [
   "Cookie Dough Digital grew out of that work. Small businesses don’t need more buzzwords. They need clear solutions, a partner who shows up, and someone who cares about their success as much as they do.",
   "I’m still hooked on solving problems — my favorite bad habit — and proud to call Bluffton home with my wife and daughter. Whether you need a website that works, help with ads or AI, a chatbot that actually books leads, or someone to untangle a messy digital project, we’re here to get it done the right way.",
 ];
-const certs = [1,2,3,4];
+const certs = [
+  ['google-ai-professional-certificate','Google AI Professional Certificate (Coursera), Gary Daniel Graham, Jul 12, 2026'],
+  ['google-ai-fundamentals','Google AI Fundamentals course certificate (Coursera), Gary Daniel Graham, Jun 14, 2026'],
+  ['google-ai-brainstorming-planning','Google AI for Brainstorming and Planning course certificate (Coursera), Jun 17, 2026'],
+  ['google-ai-research-insights','Google AI for Research and Insights course certificate (Coursera), Jun 19, 2026'],
+  ['google-ai-writing-communicating','Google AI for Writing and Communicating course certificate (Coursera), Jun 23, 2026'],
+  ['google-ai-content-creation','Google AI for Content Creation course certificate (Coursera), Jun 26, 2026'],
+  ['google-ai-data-analysis','Google AI for Data Analysis course certificate (Coursera), Jul 1, 2026'],
+  ['google-ai-app-building','Google AI for App Building course certificate (Coursera), Jul 12, 2026'],
+  ['linkedin-microsoft-generative-ai','Career Essentials in Generative AI by Microsoft and LinkedIn, Gary Daniel Graham, Jul 11, 2023'],
+  ['coursiv-ai-mastery','Coursiv AI Mastery Certificate Program, Gary Graham, 7 June 2026'],
+  ['coursiv-chatgpt','Coursiv Master of ChatGPT certificate, Gary Graham'],
+  ['coursiv-claude','Coursiv Master of Claude certificate, Gary Graham'],
+  ['coursiv-gemini','Coursiv Master of Gemini certificate, Gary Graham'],
+  ['coursiv-midjourney','Coursiv Master of Midjourney certificate, Gary Graham'],
+  ['coursiv-canva-ai','Coursiv Master of Canva AI certificate, Gary Graham'],
+  ['coursiv-lovable','Coursiv Master of Lovable certificate, Gary Graham'],
+];
 ---
 <Layout title="About · Cookie Dough Digital">
 <section class="head on-marsh"><div class="container">
@@ -28,14 +45,15 @@ const certs = [1,2,3,4];
 <section class="section certs" aria-labelledby="certs-h"><div class="container">
   <h2 id="certs-h">Certifications</h2>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
-    <div class="track" aria-live="polite">{certs.map((n,i) => (
-      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${n} of ${certs.length}`} hidden={i!==0}>
-        <div class="ph cert"><span>Certification image placeholder {n} — drop file in public/media/certs/</span></div>
+    <div class="track" aria-live="polite">{certs.map(([f,alt],i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${certs.length}`} hidden={i!==0}>
+        <img class="cert" src={`${b}/media/certs/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
       </div>))}
     </div>
+    <p class="count" aria-hidden="true"><span class="cur">1</span> / {certs.length}</p>
     <div class="controls">
       <button type="button" class="nav prev" aria-label="Previous certification">‹</button>
-      <div class="dots">{certs.map((n,i) => <button type="button" class="dot" aria-label={`Show certification ${n}`} aria-current={i===0?'true':'false'}></button>)}</div>
+      <div class="dots">{certs.map((_,i) => <button type="button" class="dot" aria-label={`Show certification ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
       <button type="button" class="nav next" aria-label="Next certification">›</button>
     </div>
   </div>
@@ -50,7 +68,8 @@ document.querySelectorAll<HTMLElement>('.carousel').forEach((c) => {
   let i = 0, timer: number | undefined;
   const show = (n: number) => { i = (n + slides.length) % slides.length;
     slides.forEach((s, k) => s.hidden = k !== i);
-    dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i))); };
+    dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
+    const cur = c.querySelector('.cur'); if (cur) cur.textContent = String(i + 1); };
   c.querySelector('.prev')!.addEventListener('click', () => show(i - 1));
   c.querySelector('.next')!.addEventListener('click', () => show(i + 1));
   dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
@@ -80,18 +99,19 @@ h1{font-size:76px}
 .certs{padding-bottom:var(--gap)}
 .certs h2{font-size:40px;margin-bottom:24px}
 .carousel{max-width:960px;margin:0 auto}
-.cert{aspect-ratio:16/10;width:100%}
+.cert{aspect-ratio:4/3;width:100%;object-fit:contain;background:#fff;border:1px solid var(--border);border-radius:var(--r);display:block}
+.count{text-align:center;color:var(--sage);font-size:14px;margin:8px 0 0}
 .controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
 .nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--marsh);background:transparent;color:var(--marsh);font-size:26px;line-height:1;cursor:pointer}
-.dots{display:flex;gap:8px}
-.dot{width:14px;height:14px;border-radius:50%;border:1px solid var(--marsh);background:transparent;padding:0;cursor:pointer}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:70%}
+.dot{width:12px;height:12px;border-radius:50%;border:1px solid var(--marsh);background:transparent;padding:0;cursor:pointer}
 .dot[aria-current="true"]{background:var(--marsh)}
 @media(max-width:820px){
   h1{font-size:44px}.head{padding:40px 0 32px}
   .story{grid-template-columns:1fr;gap:24px}.portrait{position:static;max-width:360px}
   .copy p{font-size:16px}
   .band{padding:32px 20px}
-  .certs h2{font-size:30px}.cert{aspect-ratio:4/3}
-  .dot{width:18px;height:18px}
+  .certs h2{font-size:30px}
+  .dots{display:none}
 }
 </style>
