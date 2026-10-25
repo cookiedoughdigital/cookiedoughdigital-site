@@ -9,6 +9,22 @@ const story = [
   "Cookie Dough Digital grew out of that work. Small businesses don’t need more buzzwords. They need clear solutions, a partner who shows up, and someone who cares about their success as much as they do.",
   "I’m still hooked on solving problems — my favorite bad habit — and proud to call Bluffton home with my wife and daughter. Whether you need a website that works, help with ads or AI, a chatbot that actually books leads, or someone to untangle a messy digital project, we’re here to get it done the right way.",
 ];
+const art = [
+  ['mandala','Pen-and-ink mandala ringed with small planets'],
+  ['zentangle-columns','Zentangle drawing of stacked columns over black and white stripes, signed GDG 7/4/2018'],
+  ['pattern-grid','Ink pattern sampler: a grid of 40 different hand-drawn patterns beside a pen'],
+  ['geometric-bands','Ink drawing in vertical bands of bricks, 3D cubes, dotted tiles and interlocking shapes'],
+  ['swan-wing','Ink and marker drawing of a feathered wing with a red accent'],
+  ['animal-skull','Stippled ink sketch of an animal skull in a spiral sketchbook'],
+  ['mushrooms','Crosshatched ink drawing of two spotted mushrooms with green grass'],
+  ['tree','Brush-pen outline of a broad tree in a sketchbook'],
+  ['dragonfly','Detailed ink dragonfly with blue and gold body beside a brush pen'],
+  ['fiddler-crab','Stippled ink drawing of a crab'],
+  ['bird','Ink sketch of a small bird perched on a berry branch'],
+  ['jack-o-lanterns','Ink drawing of three jack-o\u2019-lanterns wrapped in swirls and candy'],
+  ['square-zentangle','Square zentangle with a triangle border, dated 10/28/23'],
+  ['neurographic','Neurographic drawing with blue, turquoise and magenta cells'],
+];
 const certs = [
   ['google-ai-professional-certificate','Google AI Professional Certificate (Coursera), Gary Daniel Graham, Jul 12, 2026'],
   ['google-ai-fundamentals','Google AI Fundamentals course certificate (Coursera), Gary Daniel Graham, Jun 14, 2026'],
@@ -35,7 +51,7 @@ const certs = [
 </div></section>
 <section class="section"><div class="container story">
   <div class="copy">{story.map((p) => <p>{p}</p>)}</div>
-  <div class="ph portrait" role="img" aria-label="Portrait placeholder"><span>Portrait placeholder — Gary photo</span></div>
+  <img class="portrait" src={} width="1024" height="912" alt="Gary Graham, founder of Cookie Dough Digital" />
 </div></section>
 <section class="section"><div class="container"><div class="band">
   <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a free consultation →</a>
@@ -62,12 +78,12 @@ const certs = [
   <h2 id="kitchen-h">A few more plates from the kitchen</h2>
   <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands — sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
-    <div class="track" aria-live="polite">{[1,2,3,4].map((n,i) => (
-      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${n} of 4`} hidden={i!==0}>
-        <div class="ph cert" role="img" aria-label={`Art image placeholder ${n}`}><span>Art image placeholder {n} — drop file in public/media/kitchen/</span></div>
+    <div class="track" aria-live="polite">{art.map(([f,alt],i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={} hidden={i!==0}>
+        <img class="cert art" src={} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
       </div>))}
     </div>
-    <p class="count" aria-hidden="true"><span class="cur">1</span> / 4</p>
+    <p class="count" aria-hidden="true"><span class="cur">1</span> / {art.length}</p>
     <div class="controls">
       <button type="button" class="nav prev" aria-label="Previous artwork">‹</button>
       <div class="dots">{[1,2,3,4].map((n,i) => <button type="button" class="dot" aria-label={`Show artwork ${n}`} aria-current={i===0?'true':'false'}></button>)}</div>
@@ -109,13 +125,14 @@ h1{font-size:76px}
 .section{padding-top:var(--gap)}
 .story{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,420px);gap:48px;align-items:start}
 .copy p{font-size:18px;line-height:1.6;margin:0 0 20px;max-width:720px}
-.portrait{aspect-ratio:4/5;width:100%;position:sticky;top:24px}
+.portrait{aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:var(--r);display:block;position:sticky;top:24px}
 .band{background:var(--copper);border-radius:var(--r);padding:48px 40px}
 .contact{color:var(--oyster);margin:16px 0 0;font-size:16px}.contact+.contact{margin-top:4px}
 .contact a{color:var(--oyster)}
 .certs{padding-bottom:var(--gap)}
 .certs h2{font-size:40px;margin-bottom:24px}
 .kitchen{padding-top:0}
+.art{background:var(--oyster)}
 .kitchen h2{margin-bottom:12px}
 .intro{font-size:18px;line-height:1.6;max-width:720px;margin:0 0 24px;color:var(--sage)}
 .carousel{max-width:960px;margin:0 auto}
@@ -133,7 +150,6 @@ h1{font-size:76px}
   .band{padding:32px 20px}
   .certs h2{font-size:30px}
   .dots{display:none}
-  .kitchen .dots{display:flex}
-  .intro{font-size:16px}
+    .intro{font-size:16px}
 }
 </style>
