@@ -23,7 +23,9 @@ h1{font-weight:800;font-size:84px}h2{font-weight:700;font-size:44px}h3{font-weig
 /* nav */
 .site-nav{background:var(--marsh);color:var(--oyster)}
 .site-nav .container{display:flex;align-items:center;justify-content:space-between;height:76px}
-.wordmark{font-family:var(--serif);font-weight:700;font-size:22px;text-decoration:none;color:var(--oyster)}
+.logo{display:inline-flex;align-items:center;text-decoration:none;line-height:0}
+.logo-lockup{display:block;height:40px;width:auto;max-width:min(220px,55vw)}
+@media(max-width:820px){.logo-lockup{height:32px}}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a:not(.btn){font-weight:500;font-size:16px;text-decoration:none}
 .nav-toggle{display:none;background:none;border:0;color:var(--oyster);padding:4px 6px;font-size:22px;cursor:pointer;line-height:1}

@@ -9,14 +9,18 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
-<link rel="icon" type="image/svg+xml" href={`${b}/favicon.svg`} />
+<link rel="icon" type="image/png" sizes="32x32" href={`${b}/favicon-32.png`} />
+<link rel="icon" type="image/png" sizes="64x64" href={`${b}/favicon-64.png`} />
+<link rel="apple-touch-icon" href={`${b}/favicon-64.png`} />
 <title>{title}</title><meta name="description" content={description} />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,700;7..72,800&family=Nunito+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 <header class="site-nav"><div class="container">
-  <a class="wordmark" href={`${b}/`}>Cookie Dough Digital</a>
+  <a class="logo" href={`${b}/`} aria-label="Cookie Dough Digital home">
+    <img class="logo-lockup" src={`${b}/logo/lockup_white.png`} width="180" height="40" alt="Cookie Dough Digital" />
+  </a>
   <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">☰</button>
   <nav id="nav-links" class="nav-links" aria-label="Main">
     <a href={`${b}/services/`}>Services</a><a href={`${b}/work/`}>Work</a><a href={`${b}/about/`}>About</a><a href={`${b}/contact/`}>Contact</a>
