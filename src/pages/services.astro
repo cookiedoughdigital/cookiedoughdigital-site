@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+const items = [
+  ['01','Chatbot Agents','Custom AI agents that book appointments, gather leads and follow up for you.','Book a Demo Call','primary',false],
+  ['02','Websites','Fast, clean sites built to get Lowcountry customers to call or book.','Book a Consultation','ghost',false],
+  ['03','Digital Projects','One-off fixes and builds. No monthly contract — pay for the project.','Get a Project Quote','primary',true],
+  ['04','AI Training','Hands-on sessions so your team actually uses the tools you pay for.','Book a Training Session','ghost',false],
+] as const;
+---
+<Layout title="Services · Cookie Dough Digital">
+<section class="head on-marsh"><div class="container">
+  <h1>Services</h1>
+  <p class="lede">Solving the world's problems, one small business at a time. Pick what you need — nothing you don't.</p>
+</div></section>
+<section><div class="container list">{items.map(([n,t,d,c,k,tag]) => (
+  <article class="card item"><div class="txt">
+    <p class="num">{n}</p><h2>{t}</h2>
+    <p class="body">{d} We start with a quick call to scope it, then a clear quote.</p>
+    {tag && <span class="tag">No monthly contract</span>}
+    <div><a class={`btn btn-${k}`} href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(t)}`}>{c}</a></div>
+  </div><div class="ph sph" role="img" aria-label="Photo placeholder"><span>Photo placeholder</span></div></article>))}
+  <p class="also">Also: Google Ads · blog writing · graphic design · restaurant process</p>
+</div></section>
+<Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
+</Layout>
+<style>
+.head{background:var(--marsh);color:var(--oyster);padding:0}.head .container{min-height:364px;display:flex;flex-direction:column;justify-content:center}
+h1{font-size:76px}.lede{font-size:18px;max-width:640px;margin:8px 0 0}
+.list{display:flex;flex-direction:column;gap:16px}
+.item{display:grid;grid-template-columns:1fr 396px;gap:24px;padding:16px 16px 16px 22px}
+.txt{display:flex;flex-direction:column;gap:8px;padding-top:6px}.num{color:var(--copper);font-weight:700;margin:0;font-size:15px}
+.item h2{font-size:32px}.body{font-size:18px;margin:0 0 12px;max-width:640px}.tag{align-self:flex-start}.txt>div{margin-top:auto}
+.sph{height:252px}.also{margin-top:12px;font-size:16px}
+@media(max-width:820px){.head .container{min-height:304px}h1{font-size:44px}.lede{font-size:15px}.item{grid-template-columns:1fr}.sph{display:none}.item h2{font-size:24px}.body{font-size:15px}}
+</style>
