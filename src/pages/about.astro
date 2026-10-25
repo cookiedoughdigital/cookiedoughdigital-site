@@ -1,5 +1,97 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+const story = [
+  "I’m Gary Graham, founder of Cookie Dough Digital. My whole career has been about solving problems, connecting dots, and building things that actually work — in a kitchen, behind a desk, or deep in a digital project. The question never changes: how can this be better?",
+  "I grew up in New York’s Hudson Valley, about a hundred miles north of the city, raised by a single mother who taught me curiosity, hard work, and the courage to ask hard questions. Waiting-room TIME magazines and tough classroom debates left me with a lasting respect for how things work — and a habit of trying to improve them.",
+  "That mindset followed me when I traded books for chef’s knives. I worked my way from prep cook to the opening team of a semi-fine dining restaurant, and fell hard for the art and science of barbecue. Kitchens are fast, chaotic, and unforgiving — the best training I’ve ever had for managing people, pressure, and process.",
+  "In 2014 I left the kitchen and started from the ground floor in Bluffton, South Carolina — data entry at Jester Communications, no formal tech degree. The same kitchen rules applied: learn fast, stay curious, take ownership. That path led through web development, client management, Agile workflows, small-business social, and chatbot conversational marketing.",
+  "Cookie Dough Digital grew out of that work. Small businesses don’t need more buzzwords. They need clear solutions, a partner who shows up, and someone who cares about their success as much as they do.",
+  "I’m still hooked on solving problems — my favorite bad habit — and proud to call Bluffton home with my wife and daughter. Whether you need a website that works, help with ads or AI, a chatbot that actually books leads, or someone to untangle a messy digital project, we’re here to get it done the right way.",
+];
+const certs = [1,2,3,4];
 ---
-<Layout title="About · Cookie Dough Digital"><div class="container stub"><h1>About</h1><p>Page coming soon.</p><p><a href={`${b}/`}>← Back to home</a></p></div></Layout>
+<Layout title="About · Cookie Dough Digital">
+<section class="head on-marsh"><div class="container">
+  <p class="eyebrow">About</p>
+  <h1>The Main Ingredient</h1>
+</div></section>
+<section class="section"><div class="container story">
+  <div class="copy">{story.map((p) => <p>{p}</p>)}</div>
+  <div class="ph portrait" role="img" aria-label="Portrait placeholder"><span>Portrait placeholder — Gary photo</span></div>
+</div></section>
+<section class="section"><div class="container"><div class="band">
+  <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a free consultation →</a>
+  <p class="contact"><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a> · <a href="tel:4046604023">404-660-4023</a></p>
+  <p class="contact">Monday–Saturday 9AM–6PM · Closed Sundays · Bluffton, South Carolina</p>
+</div></div></section>
+<section class="section certs" aria-labelledby="certs-h"><div class="container">
+  <h2 id="certs-h">Certifications</h2>
+  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
+    <div class="track" aria-live="polite">{certs.map((n,i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${n} of ${certs.length}`} hidden={i!==0}>
+        <div class="ph cert"><span>Certification image placeholder {n} — drop file in public/media/certs/</span></div>
+      </div>))}
+    </div>
+    <div class="controls">
+      <button type="button" class="nav prev" aria-label="Previous certification">‹</button>
+      <div class="dots">{certs.map((n,i) => <button type="button" class="dot" aria-label={`Show certification ${n}`} aria-current={i===0?'true':'false'}></button>)}</div>
+      <button type="button" class="nav next" aria-label="Next certification">›</button>
+    </div>
+  </div>
+</div></section>
+<Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
+</Layout>
+<script>
+document.querySelectorAll<HTMLElement>('.carousel').forEach((c) => {
+  const slides = [...c.querySelectorAll<HTMLElement>('.slide')];
+  const dots = [...c.querySelectorAll<HTMLButtonElement>('.dot')];
+  const track = c.querySelector<HTMLElement>('.track')!;
+  let i = 0, timer: number | undefined;
+  const show = (n: number) => { i = (n + slides.length) % slides.length;
+    slides.forEach((s, k) => s.hidden = k !== i);
+    dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i))); };
+  c.querySelector('.prev')!.addEventListener('click', () => show(i - 1));
+  c.querySelector('.next')!.addEventListener('click', () => show(i + 1));
+  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+  c.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
+  let x0: number | null = null;
+  c.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  c.addEventListener('touchend', (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1)); x0 = null; });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stop = () => { clearInterval(timer); timer = undefined; track.setAttribute('aria-live', 'polite'); };
+  const start = () => { if (reduce || timer) return; track.setAttribute('aria-live', 'off'); timer = window.setInterval(() => show(i + 1), 5000); };
+  ['mouseenter', 'focusin'].forEach((ev) => c.addEventListener(ev, stop));
+  ['mouseleave', 'focusout'].forEach((ev) => c.addEventListener(ev, () => { if (!c.matches(':hover') && !c.contains(document.activeElement)) start(); }));
+  start();
+});
+</script>
+<style>
+.head{background:var(--marsh);color:var(--oyster);padding:64px 0 56px}
+.eyebrow{margin:0 0 8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--oyster);opacity:.85}
+h1{font-size:76px}
+.section{padding-top:var(--gap)}
+.story{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,420px);gap:48px;align-items:start}
+.copy p{font-size:18px;line-height:1.6;margin:0 0 20px;max-width:720px}
+.portrait{aspect-ratio:4/5;width:100%;position:sticky;top:24px}
+.band{background:var(--copper);border-radius:var(--r);padding:48px 40px}
+.contact{color:var(--oyster);margin:16px 0 0;font-size:16px}.contact+.contact{margin-top:4px}
+.contact a{color:var(--oyster)}
+.certs{padding-bottom:var(--gap)}
+.certs h2{font-size:40px;margin-bottom:24px}
+.carousel{max-width:960px;margin:0 auto}
+.cert{aspect-ratio:16/10;width:100%}
+.controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
+.nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--marsh);background:transparent;color:var(--marsh);font-size:26px;line-height:1;cursor:pointer}
+.dots{display:flex;gap:8px}
+.dot{width:14px;height:14px;border-radius:50%;border:1px solid var(--marsh);background:transparent;padding:0;cursor:pointer}
+.dot[aria-current="true"]{background:var(--marsh)}
+@media(max-width:820px){
+  h1{font-size:44px}.head{padding:40px 0 32px}
+  .story{grid-template-columns:1fr;gap:24px}.portrait{position:static;max-width:360px}
+  .copy p{font-size:16px}
+  .band{padding:32px 20px}
+  .certs h2{font-size:30px}.cert{aspect-ratio:4/3}
+  .dot{width:18px;height:18px}
+}
+</style>
