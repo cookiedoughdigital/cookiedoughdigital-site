@@ -21,7 +21,7 @@ const art = [
   ['dragonfly','Detailed ink dragonfly with blue and gold body beside a brush pen'],
   ['fiddler-crab','Stippled ink drawing of a crab'],
   ['bird','Ink sketch of a small bird perched on a berry branch'],
-  ['jack-o-lanterns','Ink drawing of three jack-o\u2019-lanterns wrapped in swirls and candy'],
+  ['jack-o-lanterns','Ink drawing of three jack-o’-lanterns wrapped in swirls and candy'],
   ['square-zentangle','Square zentangle with a triangle border, dated 10/28/23'],
   ['neurographic','Neurographic drawing with blue, turquoise and magenta cells'],
 ];
@@ -51,7 +51,7 @@ const certs = [
 </div></section>
 <section class="section"><div class="container story">
   <div class="copy">{story.map((p) => <p>{p}</p>)}</div>
-  <img class="portrait" src={} width="1024" height="912" alt="Gary Graham, founder of Cookie Dough Digital" />
+  <img class="portrait" src={`${b}/media/gary-headshot.jpg`} width="1024" height="912" alt="Gary Graham, founder of Cookie Dough Digital" />
 </div></section>
 <section class="section"><div class="container"><div class="band">
   <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a free consultation →</a>
@@ -79,14 +79,14 @@ const certs = [
   <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands — sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
     <div class="track" aria-live="polite">{art.map(([f,alt],i) => (
-      <div class="slide" role="group" aria-roledescription="slide" aria-label={} hidden={i!==0}>
-        <img class="cert art" src={} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${art.length}`} hidden={i!==0}>
+        <img class="cert art" src={`${b}/media/kitchen/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
       </div>))}
     </div>
     <p class="count" aria-hidden="true"><span class="cur">1</span> / {art.length}</p>
     <div class="controls">
       <button type="button" class="nav prev" aria-label="Previous artwork">‹</button>
-      <div class="dots">{[1,2,3,4].map((n,i) => <button type="button" class="dot" aria-label={`Show artwork ${n}`} aria-current={i===0?'true':'false'}></button>)}</div>
+      <div class="dots">{art.map((_,i) => <button type="button" class="dot" aria-label={`Show artwork ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
       <button type="button" class="nav next" aria-label="Next artwork">›</button>
     </div>
   </div>
