@@ -50,9 +50,9 @@ const certs = [
   <h1>The Main Ingredient</h1>
 </div></section>
 <section class="section"><div class="container story">
-  <div class="copy">{story.slice(0,4).map((p) => <p>{p}</p>)}</div>
+  <div class="copy">{story.slice(0,3).map((p) => <p>{p}</p>)}</div>
   <img class="portrait" src={`${b}/media/gary-headshot.jpg`} width="1024" height="912" alt="Gary Graham, founder of Cookie Dough Digital" />
-  <div class="copy wide">{story.slice(4).map((p) => <p>{p}</p>)}</div>
+  <div class="copy wide">{story.slice(3).map((p) => <p>{p}</p>)}</div>
 </div></section>
 <section class="section"><div class="container"><div class="band">
   <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a free consultation →</a>
@@ -124,9 +124,9 @@ document.querySelectorAll<HTMLElement>('.carousel').forEach((c) => {
 .eyebrow{margin:0 0 8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--oyster);opacity:.85}
 h1{font-size:76px}
 .section{padding-top:var(--gap)}
-.story{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,420px);gap:48px;align-items:start}
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,340px);column-gap:48px;row-gap:8px;align-items:start}
 .copy p{font-size:18px;line-height:1.6;margin:0 0 20px;max-width:720px}
-.portrait{aspect-ratio:3/4;width:100%;object-fit:cover;object-position:center 20%;border-radius:var(--r);display:block}
+.portrait{aspect-ratio:3/4;width:100%;height:auto;max-width:340px;justify-self:end;margin-top:6px;object-fit:cover;object-position:center 20%;border-radius:var(--r);display:block}
 .wide{grid-column:1/-1}.wide p{max-width:none}
 .band{background:var(--copper);border-radius:var(--r);padding:48px 40px}
 .contact{color:var(--oyster);margin:16px 0 0;font-size:16px}.contact+.contact{margin-top:4px}
