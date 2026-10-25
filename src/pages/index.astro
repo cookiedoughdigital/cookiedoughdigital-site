@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const SHOW_RECENT_WORK = false; // CD-261025-19: hidden for now; flip to true to show Recent local work
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 const services = [
   ['Chatbot Agents','Custom AI agents that book appointments, gather leads and follow up for you.'],
@@ -33,12 +34,15 @@ const services = [
   <div class="cards4">{services.map(([t,d]) => (
     <div class="card svc"><div class="rule"></div><h3>{t}</h3><p>{d}</p><a href={`${b}/services/`}>Learn more</a></div>))}</div>
 </div></section>
+{/* Recent local work: hidden per Gary (t70u, CD-261025-19). Set SHOW_RECENT_WORK = true to restore. */}
+{SHOW_RECENT_WORK && (
 <section class="section"><div class="container">
   <h2>Recent local work</h2>
   <div class="work">
     <figure><a class="work-link" href="https://www.buywoodpallets.com/" target="_blank" rel="noopener"><img class="shot work-img" src={`${b}/media/work/pallets-direct.jpg`} width="1024" height="756" alt="Pallets Direct website home page" loading="lazy" decoding="async" /><figcaption>Pallets Direct</figcaption></a></figure>
     {[2,3].map(() => (<figure><div class="ph shot"><span>Client site screenshot</span></div><figcaption>Client name (placeholder)</figcaption></figure>))}</div>
 </div></section>
+)}
 <section class="section"><div class="container"><div class="band">
   <h2>Want to try a bite? Let's talk about your problem first.</h2>
   <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Consultation">Book a Consultation</a>
