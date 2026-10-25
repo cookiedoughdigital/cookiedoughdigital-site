@@ -32,7 +32,7 @@ const items = [
 </Layout>
 <style>
 .head{background:var(--marsh);color:var(--oyster);padding:0}
-.head-grid{min-height:480px;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,440px);gap:32px;align-items:center;padding-top:24px;padding-bottom:48px}
+.head-grid{min-height:480px;display:grid;grid-template-columns:minmax(0,max-content) minmax(260px,420px);justify-content:center;gap:64px;align-items:center;padding-top:24px;padding-bottom:48px}
 .head-copy{min-width:0}
 h1{font-size:76px}
 .lede{font-size:18px;max-width:720px;margin:12px 0 0;line-height:1.4}
@@ -51,7 +51,7 @@ h1{font-size:76px}
 .also{margin-top:28px;font-size:16px;color:var(--sage)}
 @media(max-width:1100px){.item{grid-template-columns:minmax(0,1.2fr) 300px}.sph{width:300px;height:200px}}
 @media(max-width:820px){
-  .head-grid{grid-template-columns:1fr;min-height:0;gap:20px;padding-top:32px;padding-bottom:32px}
+  .head-grid{grid-template-columns:1fr;justify-content:stretch;min-height:0;gap:20px;padding-top:32px;padding-bottom:32px}
   .head-anim{max-width:280px;justify-self:start}
   h1{font-size:44px}.lede{font-size:15px}
   .item{grid-template-columns:1fr;min-height:0;padding:24px 20px}
