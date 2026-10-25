@@ -58,7 +58,8 @@ const certs = [
   <p class="contact"><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a> · <a href="tel:4046604023">404-660-4023</a></p>
   <p class="contact">Monday–Saturday 9AM–6PM · Closed Sundays · Bluffton, South Carolina</p>
 </div></div></section>
-<section class="section certs" aria-labelledby="certs-h"><div class="container">
+<div class="container galleries">
+<section class="section certs" aria-labelledby="certs-h"><div>
   <h2 id="certs-h">Certifications</h2>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
     <div class="track" aria-live="polite">{certs.map(([f,alt],i) => (
@@ -74,7 +75,7 @@ const certs = [
     </div>
   </div>
 </div></section>
-<section class="section certs kitchen" aria-labelledby="kitchen-h"><div class="container">
+<section class="section certs kitchen" aria-labelledby="kitchen-h"><div>
   <h2 id="kitchen-h">A few more plates from the kitchen</h2>
   <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands: sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
@@ -91,6 +92,7 @@ const certs = [
     </div>
   </div>
 </div></section>
+</div>
 <Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
 </Layout>
 <script>
@@ -138,7 +140,11 @@ h1{font-size:76px}
 .art{background:var(--oyster)}
 .kitchen h2{margin-bottom:12px}
 .intro{font-size:18px;line-height:1.6;max-width:720px;margin:0 0 24px;color:var(--sage)}
-.carousel{max-width:960px;margin:0 auto}
+.galleries{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.galleries .kitchen{padding-top:var(--gap)}
+.galleries .certs h2{font-size:32px}
+.galleries .intro{font-size:16px}
+.carousel{max-width:480px;margin:0 auto}
 .cert{aspect-ratio:4/3;width:100%;object-fit:contain;background:#fff;border:1px solid var(--border);border-radius:var(--r);display:block}
 .count{text-align:center;color:var(--sage);font-size:14px;margin:8px 0 0}
 .controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
@@ -151,7 +157,9 @@ h1{font-size:76px}
   .portrait{float:none;width:100%;max-width:360px;margin:0 auto 24px}
   .copy p{font-size:16px}
   .band{padding:32px 20px}
-  .certs h2{font-size:30px}
+  .galleries{grid-template-columns:1fr;gap:0}
+  .galleries .kitchen{padding-top:0}
+  .galleries .certs h2{font-size:30px}
   .dots{display:none}
     .intro{font-size:16px}
 }
