@@ -20,7 +20,13 @@ const services = [
       <a class="or-call" href="tel:4046604023">or call 404-660-4023</a>
     </div>
   </div>
-  <div class="ph hero-ph" role="img" aria-label="Photo placeholder"><span>Photo placeholder — Gary / local client work</span></div>
+  <div class="hero-ph hero-media">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster={`${b}/media/hero/hero-poster.jpg`} aria-hidden="true">
+      <source src={`${b}/media/hero/hero-loop.webm`} type="video/webm" />
+      <source src={`${b}/media/hero/hero-loop.mp4`} type="video/mp4" />
+    </video>
+    <img class="hero-poster" src={`${b}/media/hero/hero-poster.jpg`} width="1200" height="900" alt="Monitor with app icons settling into a neat grid" />
+  </div>
 </div></section>
 <section class="section"><div class="container">
   <h2>What we do</h2>
@@ -36,6 +42,11 @@ const services = [
   <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Consultation">Book a Consultation</a>
 </div></div></section>
 </Layout>
+<script>
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll<HTMLVideoElement>('.hero-video').forEach((v) => { v.pause(); v.removeAttribute('autoplay'); v.remove(); });
+}
+</script>
 <style>
 .hero{background:var(--marsh);color:var(--oyster);padding:0}
 /* Wider text col + slightly tighter gap so H1 stays 2 lines at 1440 */
@@ -47,6 +58,10 @@ const services = [
 .or-call{display:none;color:var(--oyster);font-weight:500;font-size:16px;text-decoration:none}
 .call-desktop{display:inline-block}
 .hero-ph{width:520px;max-width:100%;height:450px;justify-self:end}
+.hero-media{position:relative;overflow:hidden;border-radius:var(--r);background:var(--sage)}
+.hero-video,.hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
+.hero-poster{z-index:0}.hero-video{z-index:1}
+@media (prefers-reduced-motion: reduce){.hero-video{display:none}}
 /* Restore section top padding under marsh hero (was zeroed) */
 .section{padding-top:var(--gap)}
 .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
@@ -68,7 +83,7 @@ const services = [
 }
 @media(max-width:820px){
   .hero-grid{grid-template-columns:1fr;min-height:640px;gap:28px;padding-top:32px}
-  .hero-ph{width:100%;height:130px}
+  .hero-ph{width:100%;height:auto;aspect-ratio:4/3}
   /* Mobile: image between kicker and H1 */
   .hero-copy{display:contents}
   .hero-grid{gap:16px;align-content:center}
