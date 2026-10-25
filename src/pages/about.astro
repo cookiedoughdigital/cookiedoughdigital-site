@@ -61,6 +61,8 @@ const certs = [
 <div class="container galleries">
 <section class="section certs" aria-labelledby="certs-h"><div>
   <h2 id="certs-h">Certifications</h2>
+  <!-- PLACEHOLDER: Hemingway owns this Certifications intro copy (CD-261025-11). Replace text only. -->
+  <p class="intro">Copy coming from Hemingway.</p>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
     <div class="track" aria-live="polite">{certs.map(([f,alt],i) => (
       <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${certs.length}`} hidden={i!==0}>
@@ -144,6 +146,7 @@ h1{font-size:76px}
 .galleries .kitchen{padding-top:var(--gap)}
 .galleries .certs h2{font-size:32px}
 .galleries .intro{font-size:16px}
+.galleries .certs h2{margin-top:0;margin-bottom:12px}
 .carousel{max-width:480px;margin:0 auto}
 .cert{aspect-ratio:4/3;width:100%;object-fit:contain;background:#fff;border:1px solid var(--border);border-radius:var(--r);display:block}
 .count{text-align:center;color:var(--sage);font-size:14px;margin:8px 0 0}
