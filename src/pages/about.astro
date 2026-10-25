@@ -76,10 +76,10 @@ const food = [
   <h2 id="certs-h">Credentials that keep the kitchen honest</h2>
   <!-- Copy: Hemingway (CDD_certifications_blurb_2026-10-25.md), Gary-approved. -->
   <p class="intro">A few of the badges and trainings behind the work — so you know the advice isn’t just kitchen-sink improvisation.</p>
-  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
+  <div class="carousel collapsed" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
     <div class="track" aria-live="polite">{certs.map(([f,alt],i) => (
       <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${certs.length}`} hidden={i!==0}>
-        <img class="cert" src={`${b}/media/certs/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
+        <img class="cert" src={i===0?`${b}/media/certs/${f}.jpg`:undefined} data-src={i===0?undefined:`${b}/media/certs/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
       </div>))}
     </div>
     <p class="count" aria-hidden="true"><span class="cur">1</span> / {certs.length}</p>
@@ -88,6 +88,7 @@ const food = [
       <div class="dots">{certs.map((_,i) => <button type="button" class="dot" aria-label={`Show certification ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
       <button type="button" class="nav next" aria-label="Next certification">›</button>
     </div>
+    <button type="button" class="btn btn-primary see-more">See more</button>
   </div>
 </div></section>
 <section class="section consult" aria-label="Book a free consultation">
@@ -100,10 +101,10 @@ const food = [
 <section class="section certs kitchen" aria-labelledby="kitchen-h"><div>
   <h2 id="kitchen-h">A few more plates from the kitchen</h2>
   <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands: sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
-  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
+  <div class="carousel collapsed" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
     <div class="track" aria-live="polite">{art.map(([f,alt],i) => (
       <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${art.length}`} hidden={i!==0}>
-        <img class="cert art" src={`${b}/media/kitchen/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
+        <img class="cert art" src={i===0?`${b}/media/kitchen/${f}.jpg`:undefined} data-src={i===0?undefined:`${b}/media/kitchen/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
       </div>))}
     </div>
     <p class="count" aria-hidden="true"><span class="cur">1</span> / {art.length}</p>
@@ -112,15 +113,16 @@ const food = [
       <div class="dots">{art.map((_,i) => <button type="button" class="dot" aria-label={`Show artwork ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
       <button type="button" class="nav next" aria-label="Next artwork">›</button>
     </div>
+    <button type="button" class="btn btn-primary see-more">See more</button>
   </div>
 </div></section>
 <section class="section certs kitchen food" aria-labelledby="food-h"><div>
   <h2 id="food-h">No cap... I still have my mise en place</h2>
   <p class="intro">Food styling and photography for brands that want the dish to look as good as it tastes. And if you actually want me in the kitchen? Say the word... I’ll cook for real. #IronChef</p>
-  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Food gallery" tabindex="0">
+  <div class="carousel collapsed" role="region" aria-roledescription="carousel" aria-label="Food gallery" tabindex="0">
     <div class="track" aria-live="polite">{food.map(([f,alt],i) => (
       <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${food.length}`} hidden={i!==0}>
-        <img class="cert food-img" src={`${b}/media/food/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
+        <img class="cert food-img" src={i===0?`${b}/media/food/${f}.jpg`:undefined} data-src={i===0?undefined:`${b}/media/food/${f}.jpg`} alt={alt} loading={i===0?'eager':'lazy'} decoding="async" />
       </div>))}
     </div>
     <p class="count" aria-hidden="true"><span class="cur">1</span> / {food.length}</p>
@@ -129,6 +131,7 @@ const food = [
       <div class="dots">{food.map((_,i) => <button type="button" class="dot" aria-label={`Show food photo ${i+1}`} aria-current={i===0?'true':'false'}></button>)}</div>
       <button type="button" class="nav next" aria-label="Next food photo">›</button>
     </div>
+    <button type="button" class="btn btn-primary see-more">See more</button>
   </div>
 </div></section>
 </div>
@@ -155,8 +158,16 @@ document.querySelectorAll<HTMLElement>('.carousel').forEach((c) => {
   const stop = () => { clearInterval(timer); timer = undefined; track.setAttribute('aria-live', 'polite'); };
   const start = () => { if (reduce || timer) return; track.setAttribute('aria-live', 'off'); timer = window.setInterval(() => show(i + 1), 5000); };
   ['mouseenter', 'focusin'].forEach((ev) => c.addEventListener(ev, stop));
-  ['mouseleave', 'focusout'].forEach((ev) => c.addEventListener(ev, () => { if (!c.matches(':hover') && !c.contains(document.activeElement)) start(); }));
-  start();
+  ['mouseleave', 'focusout'].forEach((ev) => c.addEventListener(ev, () => { if (c.classList.contains('collapsed')) return; if (!c.matches(':hover') && !c.contains(document.activeElement)) start(); }));
+  const more = c.querySelector<HTMLButtonElement>('.see-more');
+  if (more) {
+    more.addEventListener('click', () => {
+      c.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((im) => { im.src = im.dataset.src!; im.removeAttribute('data-src'); });
+      c.classList.remove('collapsed');
+      more.remove();
+      c.querySelector<HTMLButtonElement>('.next')?.focus();
+    });
+  } else start();
 });
 </script>
 <style>
@@ -192,6 +203,8 @@ h1{font-size:76px}
 .galleries .certs h2{margin-top:0;margin-bottom:12px}
 .carousel{max-width:480px;margin:0 auto}
 .cert{aspect-ratio:4/3;width:100%;object-fit:contain;background:#fff;border:1px solid var(--border);border-radius:var(--r);display:block}
+.carousel.collapsed .count,.carousel.collapsed .controls{display:none}
+.see-more{display:block;margin:16px auto 0;cursor:pointer}
 .count{text-align:center;color:var(--sage);font-size:14px;margin:8px 0 0}
 .controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
 .nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--marsh);background:transparent;color:var(--marsh);font-size:26px;line-height:1;cursor:pointer}
