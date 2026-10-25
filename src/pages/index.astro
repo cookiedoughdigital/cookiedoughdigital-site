@@ -16,6 +16,7 @@ const services = [
     <p class="lede">Chatbots, websites and AI training for small businesses in Bluffton, Hilton Head and Beaufort. Plain talk, clear pricing, real results.</p>
     <div class="ctas">
       <a class="btn btn-primary" href="mailto:cookiedoughdigital@gmail.com?subject=Consultation">Book a Consultation</a>
+      <a class="btn btn-ghost call-desktop" href="tel:4046604023">Call 404-660-4023</a>
       <a class="or-call" href="tel:4046604023">or call 404-660-4023</a>
     </div>
   </div>
@@ -37,13 +38,17 @@ const services = [
 </Layout>
 <style>
 .hero{background:var(--marsh);color:var(--oyster);padding:0}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 560px;gap:48px;align-items:center;min-height:720px;padding-top:40px;padding-bottom:48px}
-.hero-copy{max-width:560px}
-.lede{font-size:21px;margin:16px 0 28px;max-width:520px;line-height:1.45}
+/* Wider text col + slightly tighter gap so H1 stays 2 lines at 1440 */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) 520px;gap:40px;align-items:center;min-height:720px;padding-top:40px;padding-bottom:56px}
+.hero-copy{max-width:640px;min-width:0}
+.hero-copy h1{max-width:18ch}
+.lede{font-size:21px;margin:16px 0 28px;max-width:560px;line-height:1.45}
 .ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .or-call{display:none;color:var(--oyster);font-weight:500;font-size:16px;text-decoration:none}
-.hero-ph{width:560px;max-width:100%;height:450px}
-.section{padding-top:0}
+.call-desktop{display:inline-block}
+.hero-ph{width:520px;max-width:100%;height:450px;justify-self:end}
+/* Restore section top padding under marsh hero (was zeroed) */
+.section{padding-top:var(--gap)}
 .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
 .svc{padding:32px 22px 28px;display:flex;flex-direction:column;min-height:280px}
 .svc .rule{width:40px;height:3px;background:var(--copper);margin-bottom:24px}
@@ -52,17 +57,25 @@ const services = [
 .work{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
 .work figure{margin:0}.shot{aspect-ratio:16/10}figcaption{margin-top:8px;font-size:15px;color:var(--sage)}
 .band{background:var(--copper);border-radius:var(--r);padding:48px 40px}
-.band h2{color:var(--oyster);font-size:36px;margin-bottom:24px;max-width:900px}
-@media(max-width:1100px){.hero-grid{grid-template-columns:minmax(0,1fr) 420px}.hero-ph{width:420px;height:340px}.cards4{grid-template-columns:repeat(2,1fr)}}
+.band h2{color:var(--oyster);font-size:36px;margin-bottom:24px;max-width:1100px;white-space:nowrap}
+@media(max-width:1280px){.band h2{white-space:normal}}
+@media(max-width:1100px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) 400px;gap:32px}
+  .hero-ph{width:400px;height:340px}
+  .hero-copy h1{max-width:none}
+  .cards4{grid-template-columns:repeat(2,1fr)}
+  .band h2{white-space:normal}
+}
 @media(max-width:820px){
   .hero-grid{grid-template-columns:1fr;min-height:640px;gap:28px;padding-top:32px}
   .hero-ph{width:100%;height:130px}
   .lede{font-size:17px}
+  .call-desktop{display:none}
   .or-call{display:inline}
   .cards4{grid-template-columns:1fr;gap:16px}
   .svc{min-height:0;padding:24px 20px}
   .work{grid-template-columns:1fr 1fr;gap:16px}
   .work figure:nth-child(3){display:none}
-  .band{padding:32px 20px}.band h2{font-size:26px}
+  .band{padding:32px 20px}.band h2{font-size:26px;white-space:normal}
 }
 </style>

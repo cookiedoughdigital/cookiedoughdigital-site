@@ -35,4 +35,5 @@ section{padding:var(--gap) 0}
 footer{margin-top:var(--gap);padding-bottom:24px}
 footer .container>div{border-top:1px solid var(--border);padding-top:24px;color:var(--sage);font-size:15px}
 footer p{margin:0 0 4px}
-.stub{padding:var(--gap) 0;min-height:50vh}
+footer a{text-decoration:none;color:inherit}
+.stub{padding-top:var(--gap);padding-bottom:var(--gap);min-height:50vh}
