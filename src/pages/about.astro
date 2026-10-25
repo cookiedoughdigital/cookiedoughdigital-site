@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 const story = [
-  "I’m Gary Graham, founder of Cookie Dough Digital. My whole career has been about solving problems, connecting dots, and building things that actually work — in a kitchen, behind a desk, or deep in a digital project. The question never changes: how can this be better?",
-  "I grew up in New York’s Hudson Valley, about a hundred miles north of the city, raised by a single mother who taught me curiosity, hard work, and the courage to ask hard questions. Waiting-room TIME magazines and tough classroom debates left me with a lasting respect for how things work — and a habit of trying to improve them.",
-  "That mindset followed me when I traded books for chef’s knives. I worked my way from prep cook to the opening team of a semi-fine dining restaurant, and fell hard for the art and science of barbecue. Kitchens are fast, chaotic, and unforgiving — the best training I’ve ever had for managing people, pressure, and process.",
-  "In 2014 I left the kitchen and started from the ground floor in Bluffton, South Carolina — data entry at Jester Communications, no formal tech degree. The same kitchen rules applied: learn fast, stay curious, take ownership. That path led through web development, client management, Agile workflows, small-business social, and chatbot conversational marketing.",
+  "I’m Gary Graham, founder of Cookie Dough Digital. My whole career has been about solving problems, connecting dots, and building things that actually work, in a kitchen, behind a desk, or deep in a digital project. The question never changes: how can this be better?",
+  "I grew up in New York’s Hudson Valley, about a hundred miles north of the city, raised by a single mother who taught me curiosity, hard work, and the courage to ask hard questions. Waiting-room TIME magazines and tough classroom debates left me with a lasting respect for how things work, and a habit of trying to improve them.",
+  "That mindset followed me when I traded books for chef’s knives. I worked my way from prep cook to the opening team of a semi-fine dining restaurant, and fell hard for the art and science of barbecue. Kitchens are fast, chaotic, and unforgiving: the best training I’ve ever had for managing people, pressure, and process.",
+  "In 2014 I left the kitchen and started from the ground floor in Bluffton, South Carolina: data entry at Jester Communications, no formal tech degree. The same kitchen rules applied: learn fast, stay curious, take ownership. That path led through web development, client management, Agile workflows, small-business social, and chatbot conversational marketing.",
   "Cookie Dough Digital grew out of that work. Small businesses don’t need more buzzwords. They need clear solutions, a partner who shows up, and someone who cares about their success as much as they do.",
-  "I’m still hooked on solving problems — my favorite bad habit — and proud to call Bluffton home with my wife and daughter. Whether you need a website that works, help with ads or AI, a chatbot that actually books leads, or someone to untangle a messy digital project, we’re here to get it done the right way.",
+  "I’m still hooked on solving problems, my favorite bad habit, and proud to call Bluffton home with my wife and daughter. Whether you need a website that works, help with ads or AI, a chatbot that actually books leads, or someone to untangle a messy digital project, we’re here to get it done the right way.",
 ];
 const art = [
   ['mandala','Pen-and-ink mandala ringed with small planets'],
@@ -77,7 +77,7 @@ const certs = [
 </div></section>
 <section class="section certs kitchen" aria-labelledby="kitchen-h"><div class="container">
   <h2 id="kitchen-h">A few more plates from the kitchen</h2>
-  <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands — sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
+  <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands: sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
     <div class="track" aria-live="polite">{art.map(([f,alt],i) => (
       <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${art.length}`} hidden={i!==0}>
