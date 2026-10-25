@@ -58,6 +58,23 @@ const certs = [
     </div>
   </div>
 </div></section>
+<section class="section certs kitchen" aria-labelledby="kitchen-h"><div class="container">
+  <h2 id="kitchen-h">A few more plates from the kitchen</h2>
+  <p class="intro">When I’m not fixing digital messes, I’m usually making something with my hands — sketches, paintings, and the odd piece that started as a doodle and refused to stay quiet. Here’s a little of that side of the work.</p>
+  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Art gallery" tabindex="0">
+    <div class="track" aria-live="polite">{[1,2,3,4].map((n,i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${n} of 4`} hidden={i!==0}>
+        <div class="ph cert" role="img" aria-label={`Art image placeholder ${n}`}><span>Art image placeholder {n} — drop file in public/media/kitchen/</span></div>
+      </div>))}
+    </div>
+    <p class="count" aria-hidden="true"><span class="cur">1</span> / 4</p>
+    <div class="controls">
+      <button type="button" class="nav prev" aria-label="Previous artwork">‹</button>
+      <div class="dots">{[1,2,3,4].map((n,i) => <button type="button" class="dot" aria-label={`Show artwork ${n}`} aria-current={i===0?'true':'false'}></button>)}</div>
+      <button type="button" class="nav next" aria-label="Next artwork">›</button>
+    </div>
+  </div>
+</div></section>
 <Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
 </Layout>
 <script>
@@ -98,6 +115,9 @@ h1{font-size:76px}
 .contact a{color:var(--oyster)}
 .certs{padding-bottom:var(--gap)}
 .certs h2{font-size:40px;margin-bottom:24px}
+.kitchen{padding-top:0}
+.kitchen h2{margin-bottom:12px}
+.intro{font-size:18px;line-height:1.6;max-width:720px;margin:0 0 24px;color:var(--sage)}
 .carousel{max-width:960px;margin:0 auto}
 .cert{aspect-ratio:4/3;width:100%;object-fit:contain;background:#fff;border:1px solid var(--border);border-radius:var(--r);display:block}
 .count{text-align:center;color:var(--sage);font-size:14px;margin:8px 0 0}
@@ -113,5 +133,7 @@ h1{font-size:76px}
   .band{padding:32px 20px}
   .certs h2{font-size:30px}
   .dots{display:none}
+  .kitchen .dots{display:flex}
+  .intro{font-size:16px}
 }
 </style>
