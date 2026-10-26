@@ -8,7 +8,7 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="noindex" />
+{import.meta.env.INDEXABLE !== 'true' && <meta name="robots" content="noindex" />}
 <link rel="icon" type="image/png" sizes="32x32" href={`${b}/favicon-32.png`} />
 <link rel="icon" type="image/png" sizes="64x64" href={`${b}/favicon-64.png`} />
 <link rel="apple-touch-icon" href={`${b}/favicon-64.png`} />
