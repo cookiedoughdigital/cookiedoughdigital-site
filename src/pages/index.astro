@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 const SHOW_RECENT_WORK = false; // CD-261025-19: hidden for now; flip to true to show Recent local work
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+import icoChat from '../../public/media/service-icons/chatbot-agents.svg?raw';
+import icoWeb from '../../public/media/service-icons/websites.svg?raw';
+import icoProj from '../../public/media/service-icons/digital-projects.svg?raw';
+import icoAI from '../../public/media/service-icons/ai-training.svg?raw';
+const svcIcons = {'Chatbot Agents':icoChat,'Websites':icoWeb,'Digital Projects':icoProj,'AI Training':icoAI}; // CD-261025-26
 const services = [
   ['Chatbot Agents','Custom AI agents that book appointments, gather leads and follow up for you.'],
   ['Websites','Fast, clean sites built to get Lowcountry customers to call or book.'],
@@ -32,7 +37,7 @@ const services = [
 <section class="section"><div class="container">
   <h2>What we do</h2>
   <div class="cards4">{services.map(([t,d]) => (
-    <div class="card svc"><div class="rule"></div><h3>{t}</h3><p>{d}</p><a href={`${b}/services/`}>Learn more</a></div>))}</div>
+    <div class="card svc"><span class="svc-icon" aria-hidden="true" set:html={svcIcons[t]}></span><div class="rule"></div><h3>{t}</h3><p>{d}</p><a href={`${b}/services/`}>Learn more</a></div>))}</div>
 </div></section>
 {/* Recent local work: hidden per Gary (t70u, CD-261025-19). Set SHOW_RECENT_WORK = true to restore. */}
 {SHOW_RECENT_WORK && (
@@ -80,6 +85,9 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
 .section{padding-top:var(--gap)}
 .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
 .svc{padding:32px 22px 28px;display:flex;flex-direction:column;min-height:280px}
+.svc-icon{display:block;width:52px;height:52px;color:var(--marsh);margin-bottom:14px;transition:color .2s}
+.svc-icon svg{width:100%;height:100%;display:block}
+.svc:hover .svc-icon{color:var(--copper)}
 .svc .rule{width:40px;height:3px;background:var(--copper);margin-bottom:24px}
 .svc p{color:var(--sage);margin:8px 0 16px;flex:1;font-size:16px}
 .svc a{font-weight:700;text-decoration:none;color:var(--marsh)}
