@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Copy: Hemingway rewrite 05_service_chatbots.md (CD-261031-1). Layout: Jason mock 2026-10-28/services/chatbots.html.
-// Demos: live PayMeGPT iframes (CD-261101-1). IDs in chronos/projects/paymegpt-storyteller/evidence.md.
+// Demos: PayMeGPT agent links with round profile pics (CD-261101-3/4). IDs in chronos/projects/paymegpt-storyteller/evidence.md.
 const steps = [
   ['01','Books appointments','Customers pick a time from your real calendar, day or night.'],
   ['02','Captures leads','Name, need and contact info land in your inbox or CRM. No more lost voicemails.'],
@@ -10,8 +10,8 @@ const steps = [
   ['04','Follows up','Reminders and check-ins go out on their own, so nobody slips through the cracks.'],
 ];
 const demos = [
-  ['Flora','Builds a character with you, one question at a time.','96963979'],
-  ['Storyteller','Pick a genre and a plot, and it drafts a three-act story outline.','52850650'],
+  { name: 'Flora', blurb: 'Builds a character with you, one question at a time.', id: '96963979', img: 'flora.png' },
+  { name: 'Storyteller', blurb: 'Pick a genre and a plot, and it drafts a three-act story outline.', id: '52850650', img: 'storyteller.png' },
 ];
 const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20demo%20call';
 ---
@@ -32,12 +32,18 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
 </div></section>
 <section class="section" id="demo"><div class="container">
   <p class="kicker">Try a demo</p><h2>See a bot do the work</h2>
-  <p class="intro">These demos are live. Tap Try to open one in a new tab — each visitor gets their own private chat.</p>
-  <div class="grid2">{demos.map(([n,d,id]) => (
-    <article class="card demo"><h3>{n}</h3><p>{d}</p>
-      <p class="privacy">Opens in a new tab. Your chat stays private to you — other visitors get their own blank conversation.</p>
-      <a class="btn btn-primary" href={`https://paymegpt.com/agents/${id}`} target="_blank" rel="noopener noreferrer">Try {n}</a>
-    </article>))}</div>
+  <p class="intro">Tap a bot to open a live chat in a new tab. Each visitor gets their own private conversation.</p>
+  <ul class="bot-grid">
+    {demos.map((bot) => (
+      <li>
+        <a class="bot-card" href={`https://paymegpt.com/agents/${bot.id}`} target="_blank" rel="noopener noreferrer">
+          <img class="bot-pic" src={`${b}/media/chatbots/${bot.img}`} width="160" height="160" alt="" />
+          <span class="bot-name">{bot.name}</span>
+          <span class="bot-blurb">{bot.blurb}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
 </div></section>
 <section class="section"><div class="container"><div class="band on-marsh">
   <div><h2>Ready when you are.</h2><p>We start with a free call to scope it, then send you a quote.</p></div>
@@ -56,15 +62,20 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
 .hero img{width:100%;height:auto;aspect-ratio:1280/1012;object-fit:cover;border-radius:var(--r);border:1px solid var(--border);background:var(--card)}
 .num{color:var(--copper);font-weight:700;margin:0 0 8px;font-size:15px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px}
-.step,.demo{padding:28px}.step p:not(.num),.demo p{color:var(--sage);font-size:16px;margin:10px 0 0}
+.step{padding:28px}.step p:not(.num){color:var(--sage);font-size:16px;margin:10px 0 0}
 .intro{color:var(--sage);max-width:720px}
-.demo .privacy{font-size:14px;color:var(--sage);margin:12px 0 0}.demo .btn{margin-top:20px;align-self:flex-start}
-.demo{display:flex;flex-direction:column}
+.bot-grid{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,200px));gap:36px 48px;justify-content:start}
+.bot-card{display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;color:inherit;gap:12px}
+.bot-pic{width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid var(--copper);box-shadow:0 6px 18px rgba(31,61,47,.12);background:var(--card);display:block}
+.bot-card:hover .bot-pic{border-color:var(--marsh);transform:translateY(-2px);transition:transform .15s ease,border-color .15s ease}
+.bot-name{font-weight:700;font-size:18px;color:var(--marsh);text-decoration:underline;text-underline-offset:3px}
+.bot-blurb{font-size:14px;line-height:1.45;color:var(--sage);max-width:200px}
 .band{background:var(--marsh);color:var(--oyster);border-radius:var(--r);padding:56px;display:flex;justify-content:space-between;align-items:center;gap:32px}
 .band h2{font-size:40px}.band p{margin:10px 0 0;font-size:18px;opacity:.9}.band .btn{font-size:20px;padding:18px 30px;white-space:nowrap}
-@media(max-width:1000px){.grid4{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+@media(max-width:1000px){.grid4{grid-template-columns:1fr 1fr}}
 @media(max-width:820px){.head{padding:16px 0 40px}.crumb{margin-bottom:24px}.head h1{font-size:44px}.lede{font-size:16px}
-.hero{grid-template-columns:1fr;gap:28px}.hero p.body{font-size:17px}.grid4{grid-template-columns:1fr;gap:16px}.step,.demo{padding:20px}
+.hero{grid-template-columns:1fr;gap:28px}.hero p.body{font-size:17px}.grid4{grid-template-columns:1fr;gap:16px}.step{padding:20px}
+.bot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px;justify-content:stretch}
+.bot-pic{width:120px;height:120px}
 .band{flex-direction:column;align-items:flex-start;padding:32px 24px}.band h2{font-size:28px}.band .btn{font-size:17px}}
 </style>
