@@ -17,7 +17,7 @@ export default defineConfig({
   // GitHub Pages fallback for old Google Sites paths (meta-refresh, not true 301s). Prod only.
   redirects: PROD ? {
     '/home': '/',
-    '/chat-bots': '/services/',
+    '/chat-bots': '/services/chatbots/',
     '/websites': '/services/',
     '/ai-training': '/services/',
     '/digital-projects': '/work/',
