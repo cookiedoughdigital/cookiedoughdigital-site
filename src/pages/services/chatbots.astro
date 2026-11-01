@@ -32,10 +32,11 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
 </div></section>
 <section class="section" id="demo"><div class="container">
   <p class="kicker">Try a demo</p><h2>See a bot do the work</h2>
-  <p class="intro">These demos are live. Pick one, ask it something real and watch it work.</p>
+  <p class="intro">These demos are live. Tap Try to open one in a new tab — each visitor gets their own private chat.</p>
   <div class="grid2">{demos.map(([n,d,id]) => (
     <article class="card demo"><h3>{n}</h3><p>{d}</p>
-      <iframe src={`https://paymegpt.com/agents/${id}/embed`} title={`${n} chatbot demo`} loading="lazy" allow="microphone; clipboard-write" data-agent-id={id}></iframe>
+      <p class="privacy">Opens in a new tab. Your chat stays private to you — other visitors get their own blank conversation.</p>
+      <a class="btn btn-primary" href={`https://paymegpt.com/agents/${id}`} target="_blank" rel="noopener noreferrer">Try {n}</a>
     </article>))}</div>
 </div></section>
 <section class="section"><div class="container"><div class="band on-marsh">
@@ -44,7 +45,6 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
 </div></div></section>
 <Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
 </Layout>
-<script is:inline src="https://paymegpt.com/iframe-auto-resize.js"></script>
 <style>
 .head{background:var(--marsh);color:var(--oyster);padding:24px 0 72px}
 .crumb{font-size:14px;opacity:.8;margin:0 0 40px}.crumb a{text-decoration:none;color:inherit}
@@ -59,7 +59,8 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px}
 .step,.demo{padding:28px}.step p:not(.num),.demo p{color:var(--sage);font-size:16px;margin:10px 0 0}
 .intro{color:var(--sage);max-width:720px}
-.demo iframe{display:block;width:100%;height:575px;border:none;border-radius:12px;margin-top:20px;background:#fff}
+.demo .privacy{font-size:14px;color:var(--sage);margin:12px 0 0}.demo .btn{margin-top:20px;align-self:flex-start}
+.demo{display:flex;flex-direction:column}
 .band{background:var(--marsh);color:var(--oyster);border-radius:var(--r);padding:56px;display:flex;justify-content:space-between;align-items:center;gap:32px}
 .band h2{font-size:40px}.band p{margin:10px 0 0;font-size:18px;opacity:.9}.band .btn{font-size:20px;padding:18px 30px;white-space:nowrap}
 @media(max-width:1000px){.grid4{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
