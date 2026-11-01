@@ -6,11 +6,12 @@ import icoChat from '../../public/media/service-icons/chatbot-agents.svg?raw';
 import icoWeb from '../../public/media/service-icons/websites.svg?raw';
 import icoProj from '../../public/media/service-icons/digital-projects.svg?raw';
 import icoAI from '../../public/media/service-icons/ai-training.svg?raw';
+const svcLinks = {'Chatbot Agents':'See Chatbot Agents →','Websites':'See Websites →','Digital Projects':'See Digital Projects →','AI Training':'See AI Training →'};
 const svcIcons = {'Chatbot Agents':icoChat,'Websites':icoWeb,'Digital Projects':icoProj,'AI Training':icoAI}; // CD-261025-26
 const services = [
   ['Chatbot Agents','Custom AI agents that book appointments, gather leads and follow up for you.'],
   ['Websites','Fast, clean sites built to get Lowcountry customers to call or book.'],
-  ['Digital Projects','One-off fixes and builds. No monthly contract — pay for the project.'],
+  ['Digital Projects','One messy digital problem, fixed. No monthly contract, you pay for the project.'],
   ['AI Training','Hands-on sessions so your team actually uses the tools you pay for.'],
 ];
 ---
@@ -19,11 +20,10 @@ const services = [
   <div class="hero-copy">
     <p class="kicker">A Boutique Digital Problem Solver for The Lowcountry</p>
     <h1>Digital R.O.I. is sweet</h1>
-    <p class="lede">Chatbots, websites and AI training for small businesses in Bluffton, Hilton Head and Beaufort. Plain talk, clear pricing, real results.</p>
+    <p class="lede">Chatbots, websites, digital fixes and AI training for small businesses in Bluffton, Hilton Head and Beaufort. Plain talk, clear quotes, work that actually works.</p>
     <div class="ctas">
-      <a class="btn btn-primary" href="mailto:cookiedoughdigital@gmail.com?subject=Consultation">Book a Consultation</a>
+      <a class="btn btn-primary" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a Free Consultation</a>
       <a class="btn btn-ghost call-desktop" href="tel:4046604023">Call 404-660-4023</a>
-      <a class="or-call" href="tel:4046604023">or call 404-660-4023</a>
     </div>
   </div>
   <div class="hero-ph hero-media">
@@ -37,7 +37,7 @@ const services = [
 <section class="section"><div class="container">
   <h2>What we do</h2>
   <div class="cards4">{services.map(([t,d]) => (
-    <div class="card svc"><span class="svc-icon" aria-hidden="true" set:html={svcIcons[t]}></span><div class="rule"></div><h3>{t}</h3><p>{d}</p><a href={`${b}/services/`}>Learn more</a></div>))}</div>
+    <div class="card svc"><span class="svc-icon" aria-hidden="true" set:html={svcIcons[t]}></span><div class="rule"></div><h3>{t}</h3><p>{d}</p><a href={`${b}/services/`}>{svcLinks[t]}</a></div>))}</div>
 </div></section>
 {/* Recent local work: hidden per Gary (t70u, CD-261025-19). Set SHOW_RECENT_WORK = true to restore. */}
 {SHOW_RECENT_WORK && (
@@ -49,8 +49,9 @@ const services = [
 </div></section>
 )}
 <section class="section"><div class="container"><div class="band">
-  <h2>Want to try a bite? Let's talk about your problem first.</h2>
-  <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Consultation">Book a Consultation</a>
+  <h2>Want to try a bite?</h2>
+  <p class="band-line">Tell us the problem first. The first conversation is free.</p>
+  <a class="btn btn-dark" href="mailto:cookiedoughdigital@gmail.com?subject=Free%20consultation">Book a Free Consultation</a>
 </div></div></section>
 </Layout>
 <script>
@@ -74,7 +75,6 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
 .hero-copy h1{max-width:18ch}
 .lede{font-size:21px;margin:16px 0 28px;max-width:560px;line-height:1.45}
 .ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-.or-call{display:none;color:var(--oyster);font-weight:500;font-size:16px;text-decoration:none}
 .call-desktop{display:inline-block}
 .hero-ph{width:520px;max-width:100%;height:auto;aspect-ratio:4/3;justify-self:end}
 .hero-media{position:relative;overflow:hidden;border-radius:var(--r);background:var(--sage)}
@@ -94,7 +94,8 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
 .work{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
 .work figure{margin:0}.work-img{width:100%;height:auto;object-fit:cover;object-position:top;display:block;border-radius:var(--r);border:1px solid var(--border)}.work-link{color:inherit;text-decoration:none}.work-link:hover figcaption,.work-link:focus-visible figcaption{text-decoration:underline}.shot{aspect-ratio:16/10}figcaption{margin-top:8px;font-size:15px;color:var(--sage)}
 .band{background:var(--copper);border-radius:var(--r);padding:48px 40px}
-.band h2{color:var(--oyster);font-size:36px;margin-bottom:24px;max-width:1100px;white-space:nowrap}
+.band h2{color:var(--oyster);font-size:36px;margin-bottom:12px;max-width:1100px;white-space:nowrap}
+.band-line{color:var(--oyster);font-size:20px;margin:0 0 24px;max-width:720px}
 @media(max-width:1280px){.band h2{white-space:normal}}
 @media(max-width:1100px){
   .hero-grid{grid-template-columns:minmax(0,1fr) 400px;gap:32px}
@@ -111,12 +112,10 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   .hero-grid{gap:16px;align-content:center}
   .kicker{order:1;margin:0}.hero-ph{order:2}.hero-copy h1{order:3}.lede{order:4}.ctas{order:5}
   .lede{font-size:17px}
-  .call-desktop{display:none}
-  .or-call{display:inline}
   .cards4{grid-template-columns:1fr;gap:16px}
   .svc{min-height:0;padding:24px 20px}
   .work{grid-template-columns:1fr 1fr;gap:16px}
   .work figure:nth-child(3){display:none}
-  .band{padding:32px 20px}.band h2{font-size:26px;white-space:normal}
+  .band{padding:32px 20px}.band h2{font-size:26px;white-space:normal}.band-line{font-size:17px}
 }
 </style>

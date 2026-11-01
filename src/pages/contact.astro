@@ -5,7 +5,8 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Layout title="Contact · Cookie Dough Digital" description="Book a free consultation with Cookie Dough Digital in Bluffton. Email or call for chatbot, website, ads, or AI help across Hilton Head and Beaufort.">
 <section class="head on-marsh"><div class="container head-inner">
   <p class="eyebrow">Contact</p>
-  <h1>Let's get together and brainstorm</h1>
+  <h1>Let's talk about your problem</h1>
+  <p class="lede">Your first consultation is free. Tell me what's broken, stuck or on your wish list, and we'll figure out the next step together.</p>
 </div></section>
 <section class="section"><div class="container contact-grid">
   <form class="card form" id="contact-form" action="mailto:cookiedoughdigital@gmail.com" method="post" enctype="text/plain">
@@ -13,7 +14,7 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
     <label>Name<input name="name" type="text" autocomplete="name" required /></label>
     <label>Email<input name="email" type="email" autocomplete="email" required /></label>
     <label>Phone <span class="opt">(optional)</span><input name="phone" type="tel" autocomplete="tel" /></label>
-    <label>Message<textarea name="message" rows="6" required></textarea></label>
+    <label>Message<textarea name="message" rows="6" placeholder="What's going on? A sentence or two is plenty." required></textarea></label>
     <button class="btn btn-primary" type="submit">Send message</button>
     <p class="note" id="form-note" role="status" aria-live="polite">This opens your email app with your message filled in.</p>
   </form>
@@ -31,6 +32,7 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
     <p><a href="tel:4046604023">404-660-4023</a></p>
     <p>Monday–Saturday 9AM–6PM<br />Closed Sundays</p>
     <p>Bluffton, South Carolina</p>
+    <p>In person across Bluffton, Hilton Head and Beaufort. Happy to meet at your place or over coffee.</p>
   </aside>
   </div>
 </div></section>
@@ -56,6 +58,7 @@ f?.addEventListener('submit', (e) => {
 .head-inner{padding-top:48px;padding-bottom:56px;text-align:center}
 .eyebrow{margin:0 0 8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;opacity:.85}
 h1{font-size:64px;max-width:none}
+.lede{font-size:19px;line-height:1.45;max-width:640px;margin:16px auto 0}
 .media{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;background:var(--marsh)}
 .brain,.brain-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .brain{z-index:1}

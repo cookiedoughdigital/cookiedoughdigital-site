@@ -4,15 +4,17 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 const items = [
   ['01','Chatbot Agents','Custom AI agents that book appointments, gather leads and follow up for you.','Book a Demo Call','primary',false,'/media/service-chatbots.png'],
   ['02','Websites','Fast, clean sites built to get Lowcountry customers to call or book.','Book a Consultation','ghost',false,'/media/service-websites.png'],
-  ['03','Digital Projects','One-off fixes and builds. No monthly contract — pay for the project.','Get a Project Quote','primary',true,'/media/service-digital-projects.png'],
+  ['03','Digital Projects',"One-off fixes and builds. You pay for the project, then you're done.",'Get a Project Quote','primary',true,'/media/service-digital-projects.png'],
   ['04','AI Training','Hands-on sessions so your team actually uses the tools you pay for.','Book a Training Session','ghost',false,'/media/service-ai-training.png'],
 ] as const;
 ---
 <Layout title="Services · Cookie Dough Digital" description="Websites, chatbot agents, Google Ads, AI training, and digital projects for Lowcountry small businesses. No buzzwords. Book a free consultation.">
 <section class="head on-marsh"><div class="container head-grid">
   <div class="head-copy">
-    <h1>Services</h1>
+    <p class="eyebrow">Services</p>
+    <h1>What we can fix for you</h1>
     <p class="lede">Solving the world's problems, one small business at a time.</p>
+    <p class="intro">Every job starts with a free call to scope it, then a clear quote. No buzzwords, no long contracts unless you want one.</p>
   </div>
   <div class="head-anim">
     <video class="laptop" autoplay muted loop playsinline preload="metadata" poster={`${b}/media/services/laptop-poster.jpg`} aria-hidden="true">
@@ -26,13 +28,13 @@ const items = [
   <article class="card item"><div class="txt">
     <p class="num">{n}</p><h2>{title}</h2>
     {tag && <span class="tag">No monthly contract</span>}
-    <p class="body">{d} We start with a quick call to scope it, then a clear quote.</p>
+    <p class="body">{d}</p>
     <div class="cta"><a class={`btn btn-${k}`} href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(title)}`}>{c}</a></div>
   </div>{img
     ? <img class="sph thumb" src={`${b}${img}`} width="396" height="252" alt="" />
     : <div class="ph sph" role="img" aria-label="Photo placeholder"><span>Photo placeholder</span></div>
   }</article>))}
-  <p class="also">Also: Google Ads · blog writing · graphic design · restaurant process</p>
+  <p class="also">Also on the menu: blog writing, graphic design (logos, social posts, rebrands) and restaurant process development.</p>
 </div></section>
 <Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
 </Layout>
@@ -47,6 +49,8 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
 .head-copy{min-width:0}
 h1{font-size:76px}
 .lede{font-size:18px;max-width:720px;margin:12px 0 0;line-height:1.4}
+.eyebrow{margin:0 0 8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--oyster);opacity:.85}
+.intro{font-size:17px;max-width:720px;margin:12px 0 0;line-height:1.45;opacity:.9}
 .head-anim{position:relative;overflow:hidden;width:100%;max-width:420px;height:360px;justify-self:end;display:block;border-radius:var(--r);background:#fff}
 .laptop,.laptop-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .laptop{z-index:1}
