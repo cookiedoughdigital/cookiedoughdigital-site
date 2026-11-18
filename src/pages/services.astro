@@ -4,9 +4,11 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 const items = [
   ['01','Chatbot Agents','Custom AI agents that book appointments, gather leads and follow up for you.','Book a Demo Call','primary',false,'/media/service-chatbots.png'],
   ['02','Websites','Fast, clean sites built to get Lowcountry customers to call or book.','Book a Consultation','ghost',false,'/media/service-websites.png'],
-  ['03','Digital Projects',"One-off fixes and builds. You pay for the project, then you're done.",'Get a Project Quote','primary',true,'/media/service-digital-projects.png'],
+  ['03','Digital Projects',"One-off fixes and builds. You pay for the project, then you're done.",'Get a Project Quote','primary',true,'/media/service-digital-projects-v2.png'],
   ['04','AI Training','Hands-on sessions so your team actually uses the tools you pay for.','Book a Training Session','primary',false,'/media/service-ai-training.png'],
 ] as const;
+// WebP versions served via <picture> where available (CD-261117-7). PNG stays as fallback.
+const webp: Record<string, string> = { '/media/service-digital-projects-v2.png': '/media/service-digital-projects-v2.webp' };
 // Detail-page links (Chatbots CD-261101-2; DP + AI Training CD-261117-3 draft). Websites has no detail page yet.
 const detail: Record<string, [string, string]> = {
   'Chatbot Agents': ['/services/chatbots/', 'See Chatbot Agents'],
@@ -35,7 +37,9 @@ const detail: Record<string, [string, string]> = {
     <p class="body">{d} We start with a quick call to scope it, then a clear quote.</p>
     <div class="cta"><a class={`btn btn-${k}`} href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(title)}`}>{c}</a>{detail[title] && <a class="btn btn-ghost" href={`${b}${detail[title][0]}`}>{detail[title][1]}</a>}</div>
   </div>{img
-    ? <img class="sph thumb" src={`${b}${img}`} width="396" height="252" alt="" />
+    ? (webp[img]
+      ? <picture class="sph pic"><source srcset={`${b}${webp[img]}`} type="image/webp" /><img class="thumb" src={`${b}${img}`} width="396" height="252" alt="" /></picture>
+      : <img class="sph thumb" src={`${b}${img}`} width="396" height="252" alt="" />)
     : <div class="ph sph" role="img" aria-label="Photo placeholder"><span>Photo placeholder</span></div>
   }</article>))}
   <p class="also">Also: Google Ads · blog writing · graphic design · restaurant process</p>
@@ -68,6 +72,7 @@ h1{font-size:76px}
 .tag{align-self:flex-start;margin:2px 0}
 .cta{margin-top:auto;padding-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:20px}
 .sph{width:396px;max-width:100%;height:252px;justify-self:end}
+.pic{display:block}.pic .thumb{width:100%;height:100%}
 .thumb{object-fit:cover;border-radius:var(--r);display:block;background:var(--card)}
 .also{margin-top:28px;font-size:16px;color:var(--sage)}
 .pricing-link{margin:4px 0 0;font-size:17px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
