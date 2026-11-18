@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+// CD-261117-2 DRAFT (staging only, noindex). Gary approved structure 2026-11-17 10:54 PM ET; go-live needs Hemingway check + Webster QA + Gary yes.
+// Copy: Hemingway rewrite 07_service_digital-projects.md (CD-261031-1) + Gary lock #5 ("Clear quote", not fixed-price).
+// Layout: Jason mock 2026-10-28/services/digital-projects.html (same structure as /services/chatbots/).
+// Price: CDD_rate_card_LOCKED_2026-11-07 #10 Project Based Digital Implementation = quote after a free call (no dollar figure).
+const steps = [
+  ['01','Quick scoping call',"We figure out what's broken and what done looks like."],
+  ['02','Clear quote','You know the price before any work starts.'],
+  ['03','Hands-on fix','We do the work, test it and walk you through it.'],
+  ['04','Clean handoff',"Notes and logins organized, so you're never stuck later."],
+];
+const projects = [
+  ['Google Ads','Setup, cleanup and tuning so your ad spend works harder.'],
+  ['Password and credential cleanup','Find, organize and lock down the logins scattered everywhere.'],
+  ['AI workflows','Automations and integrations that take repeat work off your plate.'],
+  ['Tool evaluations','Honest software recommendations before you sign up.'],
+  ['Docs and onboarding','Written processes so new hires get up to speed fast.'],
+  ['Restaurant process','Systems built by someone who has worked the line.'],
+];
+const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Digital%20Project%20Quote';
+---
+<Layout title="Digital Projects · Cookie Dough Digital" description="One-off digital fixes and builds for Lowcountry small businesses. No monthly contract. A free scoping call, then a clear quote before any work starts." noindex={true}>
+<section class="head on-marsh"><div class="container">
+  <p class="crumb"><a href={`${b}/services/`}>← All services</a> &nbsp;/&nbsp; Digital Projects</p>
+  <p class="kicker">Services · 03</p><h1>Digital Projects</h1>
+  <div class="tagrow"><span class="tag">No monthly contract</span></div>
+  <p class="lede">One-off fixes and builds. You pay for the project, then you're done.</p>
+</div></section>
+<section class="section"><div class="container hero">
+  <div><p class="body">Got one messy digital problem? We scope it, quote it and fix it. No monthly contract. No bloated strategy decks.</p>
+  <a class="btn btn-primary" href={mail}>Get a Project Quote</a>
+  <p class="price-line"><span class="price-label">Price</span> Quote after a free call · <a href={`${b}/pricing/`}>See pricing</a></p></div>
+  <img src={`${b}/media/service-digital-projects.png`} width="1280" height="1012" alt="" />
+</div></section>
+<section class="section" style="padding-top:0"><div class="container">
+  <p class="kicker">What you get</p><h2>How it works</h2>
+  <div class="grid4">{steps.map(([n,t,d]) => <article class="card step"><p class="num">{n}</p><h3>{t}</h3><p>{d}</p></article>)}</div>
+</div></section>
+<section class="section"><div class="container">
+  <p class="kicker">Typical projects</p><h2>Things we fix and build</h2>
+  <div class="grid3">{projects.map(([t,d]) => <article class="card mini"><h3>{t}</h3><p>{d}</p></article>)}</div>
+</div></section>
+<section class="section"><div class="container"><div class="band on-marsh">
+  <div><h2>Ready when you are.</h2><p>We start with a free call to scope it, then a clear quote.</p></div>
+  <a class="btn btn-primary" href={mail}>Get a Project Quote</a>
+</div></div></section>
+<Fragment slot="footer"><p><a href="tel:4046604023">404-660-4023</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
+</Layout>
+<style>
+.head{background:var(--marsh);color:var(--oyster);padding:24px 0 72px}
+.crumb{font-size:14px;opacity:.8;margin:0 0 40px}.crumb a{text-decoration:none;color:inherit}
+.kicker{margin:0 0 8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:var(--copper)}
+.head .kicker{color:var(--oyster);opacity:.85}
+.head h1{font-size:76px;margin-top:4px}.tagrow{margin-top:16px}.lede{font-size:20px;max-width:720px;margin:16px 0 0;line-height:1.45}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.hero p.body{font-size:20px;line-height:1.6;color:var(--marsh);margin:0 0 24px}
+.hero img{width:100%;height:auto;aspect-ratio:1280/1012;object-fit:cover;border-radius:var(--r);border:1px solid var(--border);background:var(--card)}
+.price-line{margin:20px 0 0;font-size:16px;color:var(--marsh)}.price-line a{color:var(--copper);font-weight:700}
+.price-label{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);border:1px solid var(--border);border-radius:var(--r);padding:2px 8px;margin-right:6px}
+.num{color:var(--copper);font-weight:700;margin:0 0 8px;font-size:15px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.step,.mini{padding:28px}.step p:not(.num),.mini p{color:var(--sage);font-size:16px;margin:10px 0 0}
+.band{background:var(--marsh);color:var(--oyster);border-radius:var(--r);padding:56px;display:flex;justify-content:space-between;align-items:center;gap:32px}
+.band h2{font-size:40px}.band p{margin:10px 0 0;font-size:18px;opacity:.9}.band .btn{font-size:20px;padding:18px 30px;white-space:nowrap}
+@media(max-width:1000px){.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:820px){.head{padding:16px 0 40px}.crumb{margin-bottom:24px}.head h1{font-size:44px}.lede{font-size:16px}
+.hero{grid-template-columns:1fr;gap:28px}.hero p.body{font-size:17px}.grid4,.grid3{grid-template-columns:1fr;gap:16px}.step,.mini{padding:20px}
+.band{flex-direction:column;align-items:flex-start;padding:32px 24px}.band h2{font-size:28px}.band .btn{font-size:17px}}
+</style>
