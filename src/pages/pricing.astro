@@ -7,9 +7,11 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Prices: Gary-locked rate card CD-261102-1 (2026-11-07), master_chief/projects/cdd/CDD_rate_card_LOCKED_2026-11-07.md.
 // CD-261118-1 (DRAFT, branch retainer-tiers): Website/Chatbot Maintenance $200–$400/mo replaced by retainer tiers from
 // draper/clients/cookie-dough/strategic_growth_plan_2026-11-18_v2_APPROVED.md ("Retainer tier proposal"). Blurb = plan's "For" row,
-// includes = plan's "What's covered each month" row. Group title + CTA are placeholders pending Hemingway.
+// includes = plan's "What's covered each month" row. Copy per Hemingway CD-261118-1 copy check (2026-11-17 11:38 PM ET).
+// Tier prices $250 / $400 / $700 per month: confirmed (relayed by MC) — Gary 2026-11-17 11:42 PM ET.
+// No per-card response times (Gary via MC, 11:45 PM ET): shared note says they are agreed with each client.
 type Line = { name: string; blurb: string; price: string; unit?: string; note?: string; includes?: string[]; cta: string; subject: string };
-const groups: { kicker: string; title: string; lines: Line[] }[] = [
+const groups: { kicker: string; title: string; lines: Line[]; notes?: string[] }[] = [
   { kicker: 'Websites', title: 'Websites', lines: [
     { name: 'Site Health Check', blurb: 'A plain-English checkup on whether your website is quietly losing you customers.', price: 'Free', cta: 'Get your free health check', subject: 'Site Health Check' },
     { name: 'Site Improvements', blurb: 'Targeted fixes on the site you already have.', price: '$500–$1,500', note: 'Depends on the punch list.', cta: 'Book a free call', subject: 'Site Improvements' },
@@ -20,12 +22,17 @@ const groups: { kicker: string; title: string; lines: Line[] }[] = [
     { name: 'Chatbot Creation', blurb: 'Custom AI agents that book appointments, capture leads and follow up.', price: '$1,500–$5,000', cta: 'Book a demo call', subject: 'Chatbot Creation' },
   ]},
   { kicker: 'Monthly Care', title: 'Monthly Care', lines: [
-    { name: 'Site Watch', blurb: 'For owners who want a trusted pit crew watching the live site, with a little room for small edits.', price: '$250', unit: '/mo',
-      includes: ['Uptime and SSL checks', 'Form and tracking spot check', 'Up to 1 small content or layout edit', 'Short monthly note'], cta: 'Book a free call', subject: 'Site Watch' },
-    { name: 'Site Care', blurb: 'For owners who want regular edits and hygiene, not just monitoring.', price: '$400', unit: '/mo',
-      includes: ['Everything in Site Watch', 'Up to 4 small page edits', 'Plugin/app and security hygiene checks where the platform allows', 'On-page cleanup (titles, headings, broken links) inside that edit budget', 'Staging-first changes with a short walkthrough when something goes live'], cta: 'Book a free call', subject: 'Site Care' },
-    { name: 'Site + Bot Care', blurb: 'For owners who have (or are adding) a Cookie Dough chatbot and want the site and the bot kept current.', price: '$700', unit: '/mo',
+    { name: 'Site Watch', blurb: 'A trusted pit crew watching the live site, with a little room for small edits.', price: '$250', unit: '/mo',
+      includes: ['Uptime and SSL checks', 'Form and tracking spot check', 'Up to 1 small content or layout edit', "Short monthly note of what was checked, what changed and what's next"], cta: 'Book a free call', subject: 'Site Watch' },
+    { name: 'Site Care', blurb: 'Regular edits and upkeep, not just monitoring.', price: '$400', unit: '/mo',
+      includes: ['Everything in Site Watch', 'Up to 4 small content or layout edits', 'Plugin, app and security checks where the platform allows', 'On-page cleanup (titles, headings, broken links) counted toward those 4 edits', 'Staging-first changes, with a short walkthrough when something goes live'], cta: 'Book a free call', subject: 'Site Care' },
+    { name: 'Site + Bot Care', blurb: 'Keep the site and a Cookie Dough chatbot current, whether you already have a bot or are adding one.', price: '$700', unit: '/mo',
       includes: ['Everything in Site Care', 'Chatbot FAQ and content updates when offers change', 'Connection checks for calendar, forms and inboxes', 'Light conversation tuning from real chats'], cta: 'Book a free call', subject: 'Site + Bot Care' },
+  ], notes: [
+    'What these plans do not include: redesigns, new pages beyond the monthly edit cap, ad spend, hosting fees or AI search visibility work. Site Watch and Site Care also do not include chatbot work. Extra edits or a redesign are quoted separately as Site Improvements, $500–$1,500, after a free call. A new chatbot is still Chatbot Creation, $1,500–$5,000, quoted after a free call.',
+    'Response times are agreed with each client.',
+    // Hours = general business hours only (no promise attached); wording pending Hemingway.
+    'Business hours: Mon–Sat 9 AM–6 PM ET.',
   ]},
   { kicker: 'Brand, AI & Projects', title: 'Brand, AI & Projects', lines: [
     { name: 'Brand Reimagination', blurb: 'A full refresh of how your business looks and sounds.', price: '$500–$3,000', note: 'Includes 1 round of revisions. Extra rounds $200 each.', cta: 'Book a free call', subject: 'Brand Reimagination' },
@@ -53,9 +60,10 @@ const groups: { kicker: string; title: string; lines: Line[] }[] = [
       <a class="btn btn-ghost" href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(l.subject)}`}>{l.cta}</a>
     </article>))}
   </div>
+  {g.notes && <div class="group-note">{g.notes.map((n) => <p>{n}</p>)}</div>}
 </div></section>))}
 <section class="section"><div class="container">
-  <p class="fine">Most prices are ranges. Your exact price comes in a clear quote after a free call.</p>
+  <p class="fine">Project prices are ranges. Monthly care is a set monthly fee. Your exact quote comes after a free call.</p>
   <div class="band">
     <div><h2>Not sure where you fit?</h2><p>Start with a free call. No pressure, no long contracts unless you want one.</p></div>
     <a class="btn btn-primary" href="mailto:cookiedoughdigital@gmail.com?subject=Consultation">Book a free call</a>
@@ -82,6 +90,7 @@ const groups: { kicker: string; title: string; lines: Line[] }[] = [
 .includes{margin:0 0 4px;padding-left:18px;font-size:14px;line-height:1.45;color:var(--sage)}.includes li+li{margin-top:4px}
 .price-card .btn{margin-top:auto;align-self:flex-start}
 .price-card .price + .btn,.price-card .note + .btn{margin-top:auto}
+.group-note{margin-top:16px;max-width:900px;font-size:14px;line-height:1.5;color:var(--sage)}.group-note p{margin:0 0 6px}
 .fine{color:var(--sage);font-size:15px;margin:0 0 24px}
 .band{background:var(--marsh);color:var(--oyster);border-radius:var(--r);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:32px}
 .band h2{font-size:36px}.band p{margin:10px 0 0;font-size:18px;opacity:.9}.band .btn{font-size:18px;padding:16px 26px;white-space:nowrap}
