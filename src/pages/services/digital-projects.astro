@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
-// CD-261117-2 DRAFT (staging only, noindex). Gary approved structure 2026-11-17 10:54 PM ET; go-live needs Hemingway check + Webster QA + Gary yes.
+// CD-261117-2 DRAFT (staging only; noindex via src/draft.mjs). Gary approved structure 2026-11-17 10:54 PM ET; go-live needs Hemingway check + Webster QA + Gary yes.
 // Copy: Hemingway rewrite 07_service_digital-projects.md (CD-261031-1) + Gary lock #5 ("Clear quote", not fixed-price).
 // Layout: Jason mock 2026-10-28/services/digital-projects.html (same structure as /services/chatbots/).
 // Price: CDD_rate_card_LOCKED_2026-11-07 #10 Project Based Digital Implementation = clear quote after a free call (no dollar figure); wording per Hemingway CD-261117-1.
@@ -21,7 +21,7 @@ const projects = [
 ];
 const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Digital%20Project%20Quote';
 ---
-<Layout title="Digital Projects · Cookie Dough Digital" description="One-off digital fixes and builds for Lowcountry small businesses. No monthly contract. A free scoping call, then a clear quote before any work starts." noindex={true}>
+<Layout title="Digital Projects · Cookie Dough Digital" description="One-off digital fixes and builds for Lowcountry small businesses. No monthly contract. A free scoping call, then a clear quote before any work starts.">
 <section class="head on-marsh"><div class="container">
   <p class="crumb"><a href={`${b}/services/`}>← All services</a> &nbsp;/&nbsp; Digital Projects</p>
   <p class="kicker">Services · 03</p><h1>Digital Projects</h1>
