@@ -8,7 +8,7 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 type Line = { name: string; blurb: string; price: string; unit?: string; note?: string; cta: string; subject: string };
 const groups: { kicker: string; title: string; lines: Line[] }[] = [
   { kicker: 'Websites', title: 'Websites', lines: [
-    { name: 'Site Health Check', blurb: 'A plain-English checkup on whether your website is quietly losing you customers.', price: 'Free', cta: 'Get your free health check', subject: 'Site Health Check' },
+    { name: 'Site Health Check', blurb: 'A plain-English checkup on whether your website is quietly losing you customers.', price: 'Free', cta: 'Book a free call', subject: 'Site Health Check' }, // CD-261117-8: was 'Get your free health check' (no self-serve check until automation is live)
     { name: 'Site Improvements', blurb: 'Targeted fixes on the site you already have.', price: '$500–$1,500', note: 'Depends on the punch list.', cta: 'Book a free call', subject: 'Site Improvements' },
     { name: 'Squarespace Website Build', blurb: 'A fresh Squarespace site in your brand, built to get bookings.', price: '$1,500–$5,000', cta: 'Book a free consultation', subject: 'Squarespace Website Build' },
     { name: 'Custom Website (GitHub + Astro)', blurb: 'A fast, lean, custom-built marketing site.', price: '$2,000–$4,000', cta: 'Book a free consultation', subject: 'Custom Website' },
