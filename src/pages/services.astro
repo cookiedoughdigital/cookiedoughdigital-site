@@ -7,6 +7,12 @@ const items = [
   ['03','Digital Projects','One-off fixes and builds. No monthly contract — pay for the project.','Get a Project Quote','primary',true,'/media/service-digital-projects.png'],
   ['04','AI Training','Hands-on sessions so your team actually uses the tools you pay for.','Book a Training Session','ghost',false,'/media/service-ai-training.png'],
 ] as const;
+// Detail-page links (Chatbots CD-261101-2; DP + AI Training CD-261117-3 draft). Websites has no detail page yet.
+const detail: Record<string, [string, string]> = {
+  'Chatbot Agents': ['/services/chatbots/', 'See Chatbot Agents'],
+  'Digital Projects': ['/services/digital-projects/', 'See Digital Projects'],
+  'AI Training': ['/services/ai-training/', 'See AI Training'],
+};
 ---
 <Layout title="Services · Cookie Dough Digital" description="Websites, chatbot agents, Google Ads, AI training, and digital projects for Lowcountry small businesses. No buzzwords. Book a free consultation.">
 <section class="head on-marsh"><div class="container head-grid">
@@ -27,7 +33,7 @@ const items = [
     <p class="num">{n}</p><h2>{title}</h2>
     {tag && <span class="tag">No monthly contract</span>}
     <p class="body">{d} We start with a quick call to scope it, then a clear quote.</p>
-    <div class="cta"><a class={`btn btn-${k}`} href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(title)}`}>{c}</a>{title === 'Chatbot Agents' && <a class="btn btn-ghost" href={`${b}/services/chatbots/`}>See Chatbot Agents</a>}</div>
+    <div class="cta"><a class={`btn btn-${k}`} href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(title)}`}>{c}</a>{detail[title] && <a class="btn btn-ghost" href={`${b}${detail[title][0]}`}>{detail[title][1]}</a>}</div>
   </div>{img
     ? <img class="sph thumb" src={`${b}${img}`} width="396" height="252" alt="" />
     : <div class="ph sph" role="img" aria-label="Photo placeholder"><span>Photo placeholder</span></div>

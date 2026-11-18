@@ -13,7 +13,10 @@ export default defineConfig({
   base: BASE,
   output: 'static',
   // Sitemap only on the indexable production build; /work/ is a hidden stub (CD-261026).
-  integrations: PROD ? [sitemap({ filter: (page) => !/\/work\/?$/.test(page) && !/\/(home|chat-bots|websites|ai-training|digital-projects)\/?$/.test(page) })] : [],
+  // Old Google Sites redirect stubs live at the site ROOT only (/home, /chat-bots, /websites, /ai-training, /digital-projects),
+  // so match the URL path exactly; /services/ai-training/ and /services/digital-projects/ are real pages and stay in (CD-261117-3).
+  integrations: PROD ? [sitemap({ filter: (page) => { const path = new URL(page).pathname.replace(/\/$/, '');
+    return path !== '/work' && !/^\/(home|chat-bots|websites|ai-training|digital-projects)$/.test(path); } })] : [],
   // GitHub Pages fallback for old Google Sites paths (meta-refresh, not true 301s). Prod only.
   redirects: PROD ? {
     '/home': '/',
