@@ -5,18 +5,27 @@ const draft = isDraftRoute(Astro.url.pathname, import.meta.env.BASE_URL);
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 // CD-261117 pricing mockup — STAGING ONLY. DRAFT copy for Hemingway review; not approved for live.
 // Prices: Gary-locked rate card CD-261102-1 (2026-11-07), master_chief/projects/cdd/CDD_rate_card_LOCKED_2026-11-07.md.
-type Line = { name: string; blurb: string; price: string; unit?: string; note?: string; cta: string; subject: string };
+// CD-261118-1 (DRAFT, branch retainer-tiers): Website/Chatbot Maintenance $200–$400/mo replaced by retainer tiers from
+// draper/clients/cookie-dough/strategic_growth_plan_2026-11-18_v2_APPROVED.md ("Retainer tier proposal"). Blurb = plan's "For" row,
+// includes = plan's "What's covered each month" row. Group title + CTA are placeholders pending Hemingway.
+type Line = { name: string; blurb: string; price: string; unit?: string; note?: string; includes?: string[]; cta: string; subject: string };
 const groups: { kicker: string; title: string; lines: Line[] }[] = [
   { kicker: 'Websites', title: 'Websites', lines: [
     { name: 'Site Health Check', blurb: 'A plain-English checkup on whether your website is quietly losing you customers.', price: 'Free', cta: 'Get your free health check', subject: 'Site Health Check' },
     { name: 'Site Improvements', blurb: 'Targeted fixes on the site you already have.', price: '$500–$1,500', note: 'Depends on the punch list.', cta: 'Book a free call', subject: 'Site Improvements' },
     { name: 'Squarespace Website Build', blurb: 'A fresh Squarespace site in your brand, built to get bookings.', price: '$1,500–$5,000', cta: 'Book a free consultation', subject: 'Squarespace Website Build' },
     { name: 'Custom Website (GitHub + Astro)', blurb: 'A fast, lean, custom-built marketing site.', price: '$2,000–$4,000', cta: 'Book a free consultation', subject: 'Custom Website' },
-    { name: 'Website Maintenance', blurb: 'Updates, small edits and spot checks that keep the site trustworthy.', price: '$200–$400', unit: '/mo', cta: 'Book a free call', subject: 'Website Maintenance' },
   ]},
   { kicker: 'Chatbot Agents', title: 'Chatbot Agents', lines: [
     { name: 'Chatbot Creation', blurb: 'Custom AI agents that book appointments, capture leads and follow up.', price: '$1,500–$5,000', cta: 'Book a demo call', subject: 'Chatbot Creation' },
-    { name: 'Chatbot Maintenance', blurb: 'Answers stay current and tools stay connected after launch.', price: '$200–$400', unit: '/mo', cta: 'Book a free call', subject: 'Chatbot Maintenance' },
+  ]},
+  { kicker: 'Monthly Care', title: 'Monthly Care', lines: [
+    { name: 'Site Watch', blurb: 'For owners who want a trusted pit crew watching the live site, with a little room for small edits.', price: '$250', unit: '/mo',
+      includes: ['Uptime and SSL checks', 'Form and tracking spot check', 'Up to 1 small content or layout edit', 'Short monthly note'], cta: 'Book a free call', subject: 'Site Watch' },
+    { name: 'Site Care', blurb: 'For owners who want regular edits and hygiene, not just monitoring.', price: '$400', unit: '/mo',
+      includes: ['Everything in Site Watch', 'Up to 4 small page edits', 'Plugin/app and security hygiene checks where the platform allows', 'On-page cleanup (titles, headings, broken links) inside that edit budget', 'Staging-first changes with a short walkthrough when something goes live'], cta: 'Book a free call', subject: 'Site Care' },
+    { name: 'Site + Bot Care', blurb: 'For owners who have (or are adding) a Cookie Dough chatbot and want the site and the bot kept current.', price: '$700', unit: '/mo',
+      includes: ['Everything in Site Care', 'Chatbot FAQ and content updates when offers change', 'Connection checks for calendar, forms and inboxes', 'Light conversation tuning from real chats'], cta: 'Book a free call', subject: 'Site + Bot Care' },
   ]},
   { kicker: 'Brand, AI & Projects', title: 'Brand, AI & Projects', lines: [
     { name: 'Brand Reimagination', blurb: 'A full refresh of how your business looks and sounds.', price: '$500–$3,000', note: 'Includes 1 round of revisions. Extra rounds $200 each.', cta: 'Book a free call', subject: 'Brand Reimagination' },
@@ -40,6 +49,7 @@ const groups: { kicker: string; title: string; lines: Line[] }[] = [
       <p class="blurb">{l.blurb}</p>
       <p class={l.price.startsWith('$') || l.price === 'Free' ? 'price' : 'price price-text'}>{l.price}{l.unit && <span class="unit">{l.unit}</span>}</p>
       {l.note && <p class="note">{l.note}</p>}
+      {l.includes && <ul class="includes">{l.includes.map((i) => <li>{i}</li>)}</ul>}
       <a class="btn btn-ghost" href={`mailto:cookiedoughdigital@gmail.com?subject=${encodeURIComponent(l.subject)}`}>{l.cta}</a>
     </article>))}
   </div>
@@ -69,6 +79,7 @@ const groups: { kicker: string; title: string; lines: Line[] }[] = [
 .unit{font-family:var(--sans);font-weight:700;font-size:16px;color:var(--sage);margin-left:2px}
 .price.price-text{font-family:var(--sans);font-weight:700;font-size:17px;line-height:1.35}
 .note{margin:0;font-size:14px;color:var(--sage)}
+.includes{margin:0 0 4px;padding-left:18px;font-size:14px;line-height:1.45;color:var(--sage)}.includes li+li{margin-top:4px}
 .price-card .btn{margin-top:auto;align-self:flex-start}
 .price-card .price + .btn,.price-card .note + .btn{margin-top:auto}
 .fine{color:var(--sage);font-size:15px;margin:0 0 24px}
