@@ -2,8 +2,8 @@
 // A route listed here is noindex (Layout.astro), left out of the production sitemap (astro.config.mjs)
 // and shows its draft banner (pricing.astro). GO-LIVE: delete the route from this list (or empty it) in one commit.
 // CD-261118-1 go-live: /pricing/ removed from the draft list.
-// CD-261119-1: /work/ portfolio page is a draft until Gary's yes (noindex, no sitemap, draft banner).
-export const DRAFT_ROUTES = ['/work/'];
+// CD-261119-1 go-live: /work/ removed from the draft list.
+export const DRAFT_ROUTES = [];
 
 /** pathname may include the site base (e.g. /cookiedoughdigital-site/pricing/); base defaults to '/'. */
 export function isDraftRoute(pathname, base = '/') {
