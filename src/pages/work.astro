@@ -1,5 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { isDraftRoute } from '../draft.mjs';
+const draft = isDraftRoute(Astro.url.pathname, import.meta.env.BASE_URL);
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+// CD-261119-1 portfolio ("Websites / Public Work") — DRAFT. Copy: Hemingway final 2026-11-19.
+// Screenshots: real homepage captures of each live site (2026-11-19, 1440x900 viewport, scaled to 960x600 WebP). No stock or AI images.
+// Facts per line: see /workspace/web_developer/sites/cookiedoughdigital.com/changes/CD-261119-1_portfolio.md.
+const sites = [
+  { name: 'S.E.H.L.C.', line: 'A Squarespace website for a commercial landscape and land management company in Hardeeville, SC.', url: 'https://www.sehlc.com/', label: 'sehlc.com', img: 'sehlc-home.webp', alt: 'Homepage of the S.E.H.L.C. website' },
+  { name: 'Jasper County Republican Party', line: 'A Squarespace website for the official Republican Party of Jasper County, SC.', url: 'https://www.jasperscgop.org/', label: 'jasperscgop.org', img: 'jasperscgop-home.webp', alt: 'Homepage of the Jasper County Republican Party website' },
+  { name: 'Pallets Direct', line: 'A Squarespace website for a Savannah-area wood pallet supplier.', url: 'https://www.buywoodpallets.com/', label: 'buywoodpallets.com', img: 'pallets-direct-home.webp', alt: 'Homepage of the Pallets Direct website' },
+  { name: 'Cookie Dough Digital', line: 'Our own site, custom built with Astro and hosted on GitHub Pages.', url: 'https://www.cookiedoughdigital.com/', label: 'cookiedoughdigital.com', img: 'cookiedoughdigital-home.webp', alt: 'Homepage of the Cookie Dough Digital website' },
+];
 ---
-<Layout title="Work · Cookie Dough Digital" noindex><div class="container stub"><h1>Work</h1><p>Page coming soon.</p><p><a href={`${b}/`}>← Back to home</a></p></div></Layout>
+<Layout title="Our work · Cookie Dough Digital" description="A few of the live websites we've built. Click any one to see it in action.">
+<section class="head on-marsh"><div class="container">
+  {draft && <p class="draft"><span class="tag">DRAFT</span> Draft preview. Not live yet.</p>}
+  <p class="kicker">Portfolio</p>
+  <h1>Our work</h1>
+  <p class="lede">A few of the live websites we've built. Click any one to see it in action.</p>
+</div></section>
+<section class="section"><div class="container grid">{sites.map((s) => (
+  <article class="card site">
+    <a class="shot-link" href={s.url} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img class="shot" src={`${b}/media/work/${s.img}`} width="960" height="600" alt={s.alt} loading="lazy" decoding="async" /></a>
+    <div class="txt">
+      <h2>{s.name}</h2>
+      <p class="line">{s.line}</p>
+      <a class="btn btn-ghost" href={s.url} target="_blank" rel="noopener">Visit {s.label}<span class="sr"> (opens in a new tab)</span></a>
+    </div>
+  </article>))}
+</div>
+<div class="container more"><h2>Want a site like these?</h2><a class="btn btn-primary" href="mailto:cookiedoughdigital@gmail.com?subject=Website">Book a free call</a></div>
+</section>
+<Fragment slot="footer"><p><a href="tel:+18436033134">843-603-3134</a></p><p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Bluffton · Hilton Head · Beaufort, SC</p></Fragment>
+</Layout>
+<style>
+.head{background:var(--marsh);color:var(--oyster);padding:40px 0 56px}
+.head h1{font-size:76px}
+.head .kicker{margin:0 0 8px;color:var(--oyster);opacity:.85}
+.lede{font-size:18px;max-width:720px;margin:12px 0 0;line-height:1.4}
+.draft{margin:0 0 20px;font-size:14px;opacity:.95;display:flex;align-items:center;gap:10px}
+.section{padding-top:56px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.site{display:flex;flex-direction:column;overflow:hidden}
+.shot-link{display:block;border-bottom:1px solid var(--border)}
+.shot{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--card)}
+.txt{display:flex;flex-direction:column;gap:10px;padding:22px 24px 26px;flex:1}
+.site h2{font-size:26px}
+.line{margin:0;color:var(--sage);font-size:16px;line-height:1.45}
+.site .btn{margin-top:auto;align-self:flex-start}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.more{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:20px}.more h2{font-size:30px}
+@media(max-width:820px){.more h2{font-size:24px}.head{padding:24px 0 36px}.head h1{font-size:44px}.lede{font-size:16px}
+.section{padding-top:36px}.grid{grid-template-columns:1fr;gap:16px}.site h2{font-size:22px}.txt{padding:18px 18px 22px}}
+</style>
