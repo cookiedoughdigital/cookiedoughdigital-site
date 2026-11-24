@@ -11,7 +11,9 @@ const b = import.meta.env.BASE_URL.replace(/\/$/, '');
   <div class="card form" id="contact-form">
     <h2>Send a message</h2>
     <p class="privacy">By sending this form, you agree we can contact you about your request. We don't sell your info, and we only share it with the tools that help us handle your request. See our <a href={`${b}/privacy/`}>Privacy Policy</a>.</p>
-    <div id="pmg-form" class="pmg-form" aria-busy="true"><p class="note">Loading the form…</p></div>
+    <div id="pmg-form" class="pmg-form">
+      <button type="button" class="btn btn-primary" id="pmg-show">Show the form</button>
+    </div>
     <p class="note" id="form-note" role="status" aria-live="polite">Rather call? Call or text <a href="tel:+18436033134">843-603-3134</a>, or email <a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a>.</p>
     <noscript><p class="note">The form needs JavaScript. Call or text <a href="tel:+18436033134">843-603-3134</a>, or email <a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a>.</p></noscript>
   </div>
@@ -39,9 +41,15 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.querySelectorAll<HTMLVideoElement>('.brain').forEach((v) => { v.pause(); v.remove(); });
 }
 // CD-261119-4: contact form = PayMeGPT native form 8gtq1hx3 (CDD Contact form, linked to agent Chip).
-// Submissions land in PayMeGPT (contact + form submission). Success message is set in the PayMeGPT form.
+// CD-261124-1 D2: click-to-load. No PayMeGPT request until the visitor presses "Show the form".
 const box = document.getElementById('pmg-form');
-if (box) {
+const show = document.getElementById('pmg-show') as HTMLButtonElement | null;
+show?.addEventListener('click', () => {
+  if (!box) return;
+  show.disabled = true;
+  box.setAttribute('aria-busy', 'true');
+  const loading = document.createElement('p'); loading.className = 'note'; loading.textContent = 'Loading the form…';
+  box.replaceChildren(loading);
   const s = document.createElement('script');
   s.src = 'https://paymegpt.com/forms-embed.js'; s.async = true;
   Object.assign(s.dataset, { form: '8gtq1hx3', theme: 'light', accent: '#CD7641', bg: '#FBF9F5', surface: '#FBF9F5', field: '#FFFFFF', text: '#1F3D2F', gradient: '0', source: 'site-contact' });
@@ -53,10 +61,11 @@ if (box) {
   box.appendChild(s);
   const t0 = Date.now();
   const poll = setInterval(() => {
-    if (box.querySelector('iframe')) { clearInterval(poll); box.removeAttribute('aria-busy'); box.querySelector('.note')?.remove(); }
+    const f = box.querySelector('iframe');
+    if (f) { clearInterval(poll); box.removeAttribute('aria-busy'); loading.remove(); box.classList.add('loaded'); f.focus(); }
     else if (Date.now() - t0 > 12000) { clearInterval(poll); fail(); }
   }, 200);
-}
+});
 </script>
 <style>
 .head{background:var(--marsh);color:var(--oyster);padding:0}
@@ -78,7 +87,7 @@ input:focus-visible,textarea:focus-visible{outline:3px solid var(--copper);outli
 .form .btn{align-self:flex-start;cursor:pointer}
 .note{font-size:14px;color:var(--sage);margin:0}
 .privacy{font-size:14px;margin:0;color:var(--marsh)}
-.pmg-form{min-height:420px}
+.pmg-form.loaded,.pmg-form[aria-busy="true"]{min-height:420px}
 .err{color:#8A2B12;font-weight:700;margin:0}
 .info{display:flex;flex-direction:column;gap:28px}
 .details p{font-size:18px;margin:0 0 12px}
