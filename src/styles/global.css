@@ -1,4 +1,4 @@
-:root{--marsh:#1F3D2F;--oyster:#F3F0EA;--copper:#CD7641;--copper-deep:#A9592A;--sage:#6B7C6E;--card:#FBF9F5;--border:#D8D2C6;--btn-text:#FFFFFF;--ph:#BDBDBD;
+:root{--marsh:#1F3D2F;--oyster:#F3F0EA;--copper:#CD7641;--copper-deep:#A9592A;--sage:#6B7C6E;--sage-deep:#56665A;--card:#FBF9F5;--border:#D8D2C6;--btn-text:#FFFFFF;--ph:#BDBDBD;
 --serif:'Literata',Georgia,serif;--sans:'Nunito Sans',system-ui,sans-serif;--r:8px;--pad:80px;--gap:80px}
 @media(max-width:820px){:root{--pad:24px;--gap:40px}}
 *{box-sizing:border-box}html,body{margin:0}
@@ -38,4 +38,6 @@ footer{margin-top:var(--gap);padding-bottom:96px}
 footer .container>div{border-top:1px solid var(--border);padding-top:24px;color:var(--sage);font-size:15px}
 footer p{margin:0 0 4px}
 footer a{text-decoration:none;color:inherit}
+/* CD-261124-1 D4: Privacy Policy link #56665A = 5.36:1 on oyster (sage was 3.9:1) */
+footer .legal a{color:var(--sage-deep)}
 .stub{padding-top:var(--gap);padding-bottom:var(--gap);min-height:50vh}
