@@ -3,7 +3,7 @@
 // CHIP_EXCLUDE: routes that never render the bubble. GO-DARK: set CHIP_ENABLED = false.
 export const CHIP_ENABLED = true;
 export const CHIP_WIDGET_ID = '47882242';
-export const CHIP_EXCLUDE = ['/services/chatbots/']; // inline Chip lives there (no double bot)
+export const CHIP_EXCLUDE = ['/services/chatbots/', '/contact/']; // chatbots: inline Chip (no double bot); contact: page has its own form (CD-261124-1 D6, launcher overlapped fields on mobile)
 
 export function showChip(pathname, base = '/') {
   if (!CHIP_ENABLED) return false;
