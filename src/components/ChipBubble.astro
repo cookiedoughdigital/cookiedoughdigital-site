@@ -1,0 +1,52 @@
+---
+// CD-261119-4: lightweight placeholder launcher. PayMeGPT's widget.js (~200 KB, plus an iframe that
+// creates an anonymous contact on load) is fetched ONLY after the visitor clicks/taps this button.
+import { CHIP_WIDGET_ID } from '../chat.mjs';
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<button type="button" class="chip-launch" id="chip-launch" data-widget={CHIP_WIDGET_ID} aria-label="Chat with Chip, Cookie Dough Digital's AI assistant">
+  <img src={`${b}/media/chip/chip-avatar-120.webp`} width="60" height="60" alt="" />
+  <span class="chip-label">Chat with Chip</span>
+</button>
+<p class="chip-status" id="chip-status" role="status" aria-live="polite"></p>
+<script>
+const btn = document.getElementById('chip-launch') as HTMLButtonElement | null;
+const status = document.getElementById('chip-status');
+btn?.addEventListener('click', () => {
+  const id = btn.dataset.widget!;
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+  if (status) status.textContent = 'Opening chat…';
+  const s = document.createElement('script');
+  s.src = 'https://paymegpt.com/widget.js'; s.async = true; s.dataset.widget = id;
+  const fail = () => {
+    btn.disabled = false; btn.removeAttribute('aria-busy');
+    if (status) status.textContent = 'Chat could not load. Call or text 843-603-3134, or email cookiedoughdigital@gmail.com.';
+    status?.classList.add('show');
+  };
+  s.onerror = fail;
+  document.body.appendChild(s);
+  const t0 = Date.now();
+  const poll = setInterval(() => {
+    const bubble = document.getElementById(`ultra-fast-widget-bubble-${id}`);
+    if (bubble) {
+      clearInterval(poll);
+      bubble.click();
+      btn.hidden = true;
+      if (status) status.textContent = 'Chat with Chip is open.';
+      setTimeout(() => (document.querySelector(`#ultra-fast-widget-container-${id} iframe`) as HTMLIFrameElement | null)?.focus(), 400);
+    } else if (Date.now() - t0 > 12000) { clearInterval(poll); fail(); }
+  }, 150);
+});
+</script>
+<style>
+.chip-launch{position:fixed;right:20px;bottom:20px;z-index:50;display:flex;align-items:center;gap:10px;padding:0 16px 0 0;height:60px;border:0;border-radius:30px;background:var(--marsh);color:var(--oyster);font:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 4px 14px rgba(31,61,47,.35)}
+.chip-launch img{width:60px;height:60px;border-radius:50%;border:2px solid var(--copper);object-fit:cover;display:block}
+.chip-launch:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
+.chip-launch[hidden]{display:none}
+.chip-launch[aria-busy="true"]{opacity:.8;cursor:progress}
+.chip-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+.chip-status.show{position:fixed;width:auto;height:auto;clip:auto;right:20px;bottom:92px;max-width:280px;background:#fff;color:var(--marsh);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:14px;z-index:50}
+@media(max-width:820px){.chip-label{display:none}.chip-launch{padding:0;width:60px}}
+:global(body.nav-open) .chip-launch, :global(body.nav-open) [id^="ultra-fast-widget-bubble-"]{display:none !important}
+@media (prefers-reduced-motion: reduce){.chip-launch{transition:none}}
+</style>

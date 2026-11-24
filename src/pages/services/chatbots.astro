@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ChipInline from '../../components/ChipInline.astro';
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Copy: Hemingway rewrite 05_service_chatbots.md (CD-261031-1). Layout: Jason mock 2026-10-28/services/chatbots.html.
 // Demos: PayMeGPT agent links with round profile pics (CD-261101-3/4). IDs in chronos/projects/paymegpt-storyteller/evidence.md.
@@ -22,6 +23,11 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
   <p class="kicker">Services · 01</p><h1>Chatbot Agents</h1>
   <p class="lede">Custom AI agents that book appointments, gather leads and follow up for you.</p>
 </div></section>
+<section class="section" id="chip"><div class="container">
+  <h2>Chat with Chip</h2>
+  <p class="intro">Meet Chip, our AI assistant. Ask about our services, or request a free call. Chip will take your details and a preferred time, and a person will follow up to set the call. This isn't a booked appointment.</p>
+  <ChipInline />
+</div></section>
 <section class="section"><div class="container hero">
   <div><p class="body">We're not in the business of replacing humans. These bots don't just talk, they do. They plug into your calendar, forms and tools so the busywork gets handled day and night.</p>
   <a class="btn btn-primary" href={mail}>Book a Demo Call</a></div>
@@ -32,8 +38,8 @@ const mail = 'mailto:cookiedoughdigital@gmail.com?subject=Chatbot%20Agents%20dem
   <div class="grid4">{steps.map(([n,t,d]) => <article class="card step"><p class="num">{n}</p><h3>{t}</h3><p>{d}</p></article>)}</div>
 </div></section>
 <section class="section" id="demo"><div class="container">
-  <p class="kicker">Try a demo</p><h2>See a bot do the work</h2>
-  <p class="intro">Tap a bot to open a live chat in a new tab. Each visitor gets their own private conversation.</p>
+  <p class="kicker">Try a demo</p><h2>More demos</h2>
+  <p class="intro">Want to see other kinds of bots? Tap a demo to open a live chat in a new tab. Each visitor gets their own private conversation. These demos are examples, not Chip.</p>
   <ul class="bot-grid">
     {demos.map((bot) => (
       <li>

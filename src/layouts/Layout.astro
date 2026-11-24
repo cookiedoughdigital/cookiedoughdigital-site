@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { isDraftRoute } from '../draft.mjs';
+import { showChip } from '../chat.mjs';
+import ChipBubble from '../components/ChipBubble.astro';
 // SEO (CD-261026). description: TODO Hemingway per-page copy (Gary approves) — fallback is the existing tagline.
 // image: Jason OG default (CD-261026-J), 1200x630.
 interface Props { title?: string; description?: string; image?: string; noindex?: boolean }
@@ -8,6 +10,7 @@ const { title = 'Cookie Dough Digital', description = 'A Boutique Digital Proble
 const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Draft routes (src/draft.mjs) are always noindex until removed from that list at go-live.
 const indexable = import.meta.env.INDEXABLE === 'true' && !noindex && !isDraftRoute(Astro.url.pathname, import.meta.env.BASE_URL);
+const chip = showChip(Astro.url.pathname, import.meta.env.BASE_URL);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const imageUrl = image ? new URL(`${b}${image}`, Astro.site).href : undefined;
 const jsonLd = {
@@ -63,9 +66,10 @@ const jsonLd = {
 <footer><div class="container"><div><slot name="footer">
   <p>Cookie Dough Digital · Bluffton, SC</p><p><a href="tel:+18436033134">843-603-3134</a></p>
   <p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Mon–Sat 9AM–6PM</p>
-</slot></div></div></footer>
+</slot><p class="legal"><a href={`${b}/privacy/`}>Privacy Policy</a></p></div></div></footer>
+{chip && <ChipBubble />}
 <script>
 const t=document.querySelector('.nav-toggle'),l=document.getElementById('nav-links');
-t?.addEventListener('click',()=>{const o=l?.classList.toggle('open');t.setAttribute('aria-expanded',String(!!o));});
+t?.addEventListener('click',()=>{const o=l?.classList.toggle('open');t.setAttribute('aria-expanded',String(!!o));document.body.classList.toggle('nav-open',!!o);});
 </script>
 </body></html>
