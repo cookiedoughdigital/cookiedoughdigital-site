@@ -63,7 +63,7 @@ const jsonLd = {
 <footer><div class="container"><div><slot name="footer">
   <p>Cookie Dough Digital · Bluffton, SC</p><p><a href="tel:+18436033134">843-603-3134</a></p>
   <p><a href="mailto:cookiedoughdigital@gmail.com">cookiedoughdigital@gmail.com</a></p><p>Mon–Sat 9AM–6PM</p>
-</slot></div></div></footer>
+</slot><p class="legal"><a href={`${b}/privacy/`}>Privacy Policy</a></p></div></div></footer>
 <script>
 const t=document.querySelector('.nav-toggle'),l=document.getElementById('nav-links');
 t?.addEventListener('click',()=>{const o=l?.classList.toggle('open');t.setAttribute('aria-expanded',String(!!o));});
