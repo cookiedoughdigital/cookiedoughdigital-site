@@ -35,7 +35,7 @@ h1{font-weight:800;font-size:84px}h2{font-weight:700;font-size:44px}h3{font-weig
 .nav-links.open{display:flex}.site-nav{position:relative}}
 section{padding:var(--gap) 0}
 footer{margin-top:var(--gap);padding-bottom:96px}
-footer .container>div{border-top:1px solid var(--border);padding-top:24px;color:var(--sage);font-size:15px}
+footer .container>div{border-top:1px solid var(--border);padding-top:24px;color:var(--sage-deep);font-size:15px} /* CD-261124-1 D4b: whole footer #56665A = 5.36:1 (sage was 3.9:1) */
 footer p{margin:0 0 4px}
 footer a{text-decoration:none;color:inherit}
 /* CD-261124-1 D4: Privacy Policy link #56665A = 5.36:1 on oyster (sage was 3.9:1) */
