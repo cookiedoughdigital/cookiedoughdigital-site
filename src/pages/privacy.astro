@@ -29,7 +29,7 @@ import Layout from '../layouts/Layout.astro';
 <p>We do not ask for passwords, logins, payment details, or other sensitive information through the chatbot.</p>
 <p>The chat conversation is stored by PayMeGPT, the company that runs the chat tool.</p>
 <h3>Our contact form</h3>
-<p>If you use the contact form on our website, we collect the information you enter and send it to PayMeGPT so we can follow up.</p>
+<p>If you use the contact form on our website, we collect the information you enter and send it to PayMeGPT and a Google Sheet so we can follow up.</p>
 <h3>Free Site Health Check</h3>
 <p>A dedicated Health Check form is not live yet. Until it is, a Health Check request through the chatbot uses the same questions listed above, and a website address is required.</p>
 <p>When a Health Check form launches, we expect it to ask for your name, work email, website address, business name, business type, city and ZIP, your role, whether you own the business, an authorization, and optionally a phone number and a note. We will update this page if those fields change. We also plan to keep a shared log of every Health Check request, including requests we decline.</p>
@@ -50,6 +50,7 @@ import Layout from '../layouts/Layout.astro';
 <p>These companies process information so we can handle your request:</p>
 <ul>
 <li><strong>PayMeGPT</strong>, which runs the chatbot, contact records, the lead pipeline, and forms. PayMeGPT stores conversation data in the United States.</li>
+<li><strong>Google</strong>, through a Google Sheet in our Google account that logs leads from the chatbot, the contact form, and, when it launches, the Health Check form</li>
 <li><strong>The AI model provider</strong> configured for Chip. Your chat messages are sent to that provider so Chip can reply. The provider depends on the model we choose, and it can change if we change the model.</li>
 <li><strong>Stripe</strong>, which the chat tool loads. Stripe may collect device signals and set a cookie used for fraud prevention.</li>
 <li><strong>IP geolocation services</strong> used by PayMeGPT (ipapi.co and ip-api.com), which turn your IP address into an approximate city, region, and country</li>
@@ -58,7 +59,7 @@ import Layout from '../layouts/Layout.astro';
 <p>We do not use Google Calendar to book calls. If we later send mail through a business email service, we will update this page before that starts.</p>
 <h2>How long we keep it</h2>
 <p>PayMeGPT keeps chat conversations for about two years, or until a deletion request, under PayMeGPT's policy.</p>
-<p>We keep information in our own records only as long as we need it to respond to you and run our business, then we delete it. We may keep information longer if the law requires it.</p>
+<p>We keep information in our Google Sheet and our own records only as long as we need it to respond to you and run our business, then we delete it. We may keep information longer if the law requires it.</p>
 <h2>Your choices</h2>
 <p>You can ask to see, correct, or delete your information by emailing or calling us at the contact details below. We'll respond within 30 days.</p>
 <h2>Cookies and analytics</h2>
