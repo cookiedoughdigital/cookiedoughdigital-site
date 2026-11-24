@@ -50,6 +50,8 @@ show?.addEventListener('click', () => {
   box.setAttribute('aria-busy', 'true');
   const loading = document.createElement('p'); loading.className = 'note'; loading.textContent = 'Loading the form…';
   box.replaceChildren(loading);
+  // CD-261124-1 D7: the button is gone, so hold keyboard focus on the form container (tabindex=-1); the next Tab enters the form.
+  box.tabIndex = -1; box.focus({ preventScroll: true });
   const s = document.createElement('script');
   s.src = 'https://paymegpt.com/forms-embed.js'; s.async = true;
   Object.assign(s.dataset, { form: '8gtq1hx3', theme: 'light', accent: '#A9592A', bg: '#FBF9F5', surface: '#FBF9F5', field: '#FFFFFF', text: '#1F3D2F', gradient: '0', source: 'site-contact' });
@@ -62,7 +64,7 @@ show?.addEventListener('click', () => {
   const t0 = Date.now();
   const poll = setInterval(() => {
     const f = box.querySelector('iframe');
-    if (f) { clearInterval(poll); box.removeAttribute('aria-busy'); loading.remove(); box.classList.add('loaded'); f.focus(); }
+    if (f) { clearInterval(poll); box.removeAttribute('aria-busy'); loading.remove(); box.classList.add('loaded'); } // D7: focus stays on #pmg-form; the next Tab enters the form's first field
     else if (Date.now() - t0 > 12000) { clearInterval(poll); fail(); }
   }, 200);
 });
@@ -85,6 +87,7 @@ label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:15px}
 input,textarea{font:inherit;font-weight:400;font-size:16px;padding:12px;border:1px solid var(--border);border-radius:var(--r);background:#fff;color:inherit}
 input:focus-visible,textarea:focus-visible{outline:3px solid var(--copper);outline-offset:1px}
 .form .btn{align-self:flex-start;cursor:pointer}
+.pmg-form:focus{outline:none} /* D7: programmatic focus target only; focus moves into the form */
 .note{font-size:14px;color:var(--sage-deep);margin:0} /* CD-261124-1 D4: 5.8:1 on card (sage was 4.22:1) */
 .privacy{font-size:14px;margin:0;color:var(--marsh)}
 .pmg-form.loaded,.pmg-form[aria-busy="true"]{min-height:420px}
